@@ -29,8 +29,7 @@ def login():
                 # flask中的session是经过加密后存储在cookie
                 flash("welcome on")
                 session['user_id'] = user.id
-                return redirect("/da")
-
+                return redirect("/")
             else:
                 print("密码错误")
                 return redirect(url_for("auth.login"))

@@ -1,0 +1,83 @@
+
+{% from 'macros.html' import static_file, img %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    {{ static_file('css', 'init.css') }}
+    {{ static_file('css', 'base.css') }}
+    {{ static_file('icon', 'favicon2.ico') }}
+    {% block styles %}{% endblock %}
+</head>
+
+<body>
+    <!-- 开始 顶栏  -->
+    <div class="nav">
+        <!-- 开始 LOGO-站名  -->
+        <div class="logo">
+            <div>
+                {{ img('logo1.jpg', class="xd_logo") }}
+            </div>
+        </div>
+        <!-- 结束 LOGO-站名  -->
+
+        <!-- 开始 导航项 -->
+        <div class="goto ">
+            <a class="gotoItm " href="{{ url_for('index.index') }}">首页</a>
+            <a class="gotoItm " href="{{ url_for('index.index') }}">新闻公告</a>
+            <a class="gotoItm " href="{{ url_for('index.index') }}">竞赛信息</a>
+            <a class="gotoItm " href="{{ url_for('index.index') }}">资源库</a>
+            <a class="gotoItm " href="{{ url_for('index.index') }}">经验分享</a>
+            <a class="gotoItm " href="{{ url_for('index.index') }}">私人定制</a>
+            <a class="gotoItm " href="{{ url_for('index.index') }}">个人中心</a>
+            <a class="gotoItm " href="{{ url_for('auth.login') }}" target="_blank">登录</a>
+        </div>
+        <!-- 结束 导航项 -->
+    </div>
+    <!-- 结束 顶栏  -->
+
+    {% block content %}
+    {% endblock %}
+
+
+
+    <!-- 结束 底部栏 -->
+    <div class="footer">
+        <div class="others">
+            <div class="item">
+                {{ img('gongzhonghao1.jpg') }}
+                <div>竞赛助手小程序</div>
+            </div>
+            <div class="item">
+                {{ img('gongzhonghao1.jpg') }}
+                <div>竞赛助手小程序</div>
+            </div>
+            <div class="item">
+                {{ img('gongzhonghao1.jpg') }}
+                <div>竞赛助手小程序</div>
+            </div>
+            <div class="item">
+                {{ img('gongzhonghao1.jpg') }}
+                <div>竞赛助手小程序</div>
+            </div>
+        </div>
+
+        <div class="uList">
+            <a class="item" href="#">反馈与帮助</a>
+            <a class="item" href="#">关于网站</a>
+            <a class="item" href="#">竞赛助手小程序</a>
+        </div>
+        <!--    <div class="cpr">2022-2022 版权©xxx所有 </div>-->
+        <div class="contactUs">反馈邮箱：xxx@qq.com</div>
+    </div>
+    <!-- 结束 底部栏 -->
+</body>
+
+</html>

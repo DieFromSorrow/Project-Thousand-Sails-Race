@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+
+{% block title %}千帆竞发{% endblock %}
+
+{% block styles %}
+    {{ static_file('css', 'index.css') }}
+    {{ static_file('js', 'animate.js') }}
+    {{ static_file('js', 'rotation_chart.js') }}
+{% endblock %}
+
+
+{% block content %}
+    <div class="banner w">
+
+        <div class="subnav">
+            <ul>
+                <li>
+                    <a href="#">前端开发 <span>&gt</span></a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="#">前端开发<span>&gt</span></a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="#">前端开发<span>&gt</span></a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="#">前端开发<span>&gt</span></a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="#">前端开发<span>&gt</span></a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="#">前端开发<span>&gt</span></a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <!-- 轮播图 start -->
+            <div class="focus ">
+                <!-- 左侧按钮 -->
+                <a href="javascript:;" class="arrow-l">&lt;</a>
+                <!-- 右侧按钮 -->
+                <a href="javascript:;" class="arrow-r"> &gt; </a>
+                <!-- 核心的滚动区域 -->
+                <ul>
+                    <li>
+                        <a href="#">{{ img('focus0.jpg') }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ img('focus1.jpg') }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ img('focus2.jpg') }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ img('focus3.jpg') }}</a>
+                    </li>
+                </ul>
+                <!-- 小圆圈 -->
+                <ol class="circle"></ol>
+            </div>
+            <!-- 轮播图 end -->
+        </div>
+        <div class="cource">
+            <h2>我的课程</h2>
+            <div class="bd">
+                <ul>
+                    <li>
+                        <h4>继续学习 程序语言设计</h4>
+                        <p>正在学习 使用对象</p>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li>
+                        <h4>继续学习 程序语言设计</h4>
+                        <p>正在学习 使用对象</p>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li>
+                        <h4>继续学习 程序语言设计</h4>
+                        <p>正在学习 使用对象</p>
+                    </li>
+                </ul>
+                <a href="#" class="more">全部课程</a>
+            </div>
+        </div>
+
+    </div>
+    <!-- banner end -->
+
+    <!-- 精品推荐开始 -->
+    <div class="goods w">
+        <h3>精品推荐</h3>
+        <ul>
+            <li>
+                <a href="#">jQuery</a>
+            </li>
+            <li>
+                <a href="#">jQuery</a>
+            </li>
+            <li>
+                <a href="#">jQuery</a>
+            </li>
+            <li>
+                <a href="#">jQuery</a>
+            </li>
+            <li>
+                <a href="#">jQuery</a>
+            </li>
+            <li>
+                <a href="#">jQuery</a>
+            </li>
+            <li>
+                <a href="#">jQuery</a>
+            </li>
+        </ul>
+        <a href="#" class="mod">修改兴趣</a>
+    </div>
+    <!-- 精品推荐结束 -->
+
+
+    <!-- 热门推荐 start -->
+    <div class="box wrapper w">
+        <div class="title">
+            <h2>热门推荐</h2>
+            <a href="#">查看全部</a>
+        </div>
+
+        <div class="content clearfix">
+            <ul>
+                <li class="rm">
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>全国大学生数学建模大赛</h3>
+                        <p><span>精选</span> • 2678次浏览</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>全国大学生力学竞赛</h3>
+                        <p><span>精选</span> • 2068次浏览</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>华北五省机器人大赛</h3>
+                        <p><span>精选</span> • 759次浏览</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>2023年第一届国际大学生英语阅读大赛</h3>
+                        <p><span>精选</span> • 1864次浏览</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>2022年“创新实践杯”全国大学生竞赛</h3>
+                        <p><span>精选</span> • 954次浏览</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>第三届“昆玉杯”全国大学生创艺设计大赛</h3>
+                        <p><span>精选</span> • 289次浏览</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>2023年第二届全国青年创新翻译大赛</h3>
+                        <p><span>精选</span> • 388次浏览</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>2023年第二届大学生健康科普知识竞赛</h3>
+                        <p><span>精选</span> • 885次浏览</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>22023年第七届普译奖全国大学生翻译大赛</h3>
+                        <p><span>精选</span> • 784次浏览</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        {{ img('666.png') }}
+                        <h3>全国大学生数学竞赛</h3>
+                        <p><span>精选</span> • 1354次浏览</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+{% endblock %}
