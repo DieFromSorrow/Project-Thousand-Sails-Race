@@ -1,0 +1,107 @@
+body {
+    background: #f3f3f3;
+    /* height: 2000px; */
+}
+
+.nav {
+    z-index: 100;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-weight: 600;
+    height: 77px;
+    width: 100%;
+    min-width: 515px;
+    border-bottom: 2px solid rgba(220, 220, 220, 0.85);
+    transition: height .4s;
+    -moz-transition: height .4s;
+    -webkit-transition: height .4s;
+}
+
+.logo {
+    /* width: 70px; */
+    float: left;
+    position: relative;
+    /* margin-left: 100px; */
+}
+
+.logo .xd_logo {
+    /*display: inline;*/
+    height: 74px;
+    width: auto;
+}
+
+.goto {
+    margin: 30px 0;
+    float: right;
+    padding-right: 10px;
+}
+
+.goto .gotoItm {
+    user-select: none;
+    text-decoration: none;
+    color: #0D83FE;
+    margin-left: 14px;
+    padding: 4px 4px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.goto .gotoItm:hover {
+    text-shadow: 1px 1px 1px #008cff61;
+}
+
+.footer {
+    background: #fff;
+    margin: 20px auto 0;
+    padding: 8px 0 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.footer .uList {
+    padding: 10px 0;
+}
+
+.footer .others {
+    display: flex;
+    padding: 0 0 10px 0;
+    border-bottom: 1px dotted rgb(155, 155, 155);
+}
+
+.footer .others img {
+    width: 80px;
+    height: 80px;
+    padding-bottom: 3px;
+}
+
+.footer .others .item {
+    text-align: center;
+    padding: 0 8px;
+}
+
+.footer .others .item div {
+    width: 100px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.footer .uList a {
+    text-decoration: none;
+    color: #0D83FE;
+    font-size: 15px;
+    margin: 0 8px;
+    font-weight: 600;
+}
+
+.footer .uList a:hover {
+    text-shadow: 1px 1px 1px #008cff61;
+}
+
+.contactUs {
+    font-size: 13px;
+}

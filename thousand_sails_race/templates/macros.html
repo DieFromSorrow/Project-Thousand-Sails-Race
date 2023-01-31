@@ -1,0 +1,32 @@
+<!-- 宏 -->
+
+{% macro static_file(type, filename_or_url, local=True) %}
+    {% if local %}
+        {% if type == 'css' %}
+            {% set predict_name = 'styles/' %}
+        {% elif type == 'js' %}
+            {% set predict_name = 'scripts/' %}
+        {% elif type == 'icon' %}
+            {% set predict_name = 'images/' %}
+        {% endif %}
+    {% endif %}
+    {% set filename_or_url = url_for('static', filename=predict_name+filename_or_url) %}
+    {% if type == 'css' %}
+        <link rel="stylesheet" href="{{ filename_or_url }}" type="text/css">
+    {% elif type == 'js' %}
+        <script type="text/javascript" src="{{ filename_or_url }}"></script>
+    {% elif type == 'icon' %}
+        <link rel="icon" href="{{ filename_or_url }}">
+    {% endif %}
+{% endmacro %}
+
+
+{% macro img(filename_or_url, class='', alt='') %}
+    {% set filename_or_url = url_for('static', filename='images/'+filename_or_url) %}
+    <img
+            src="{{ filename_or_url }}"
+            {% if class != '' %} class="{{ class }}" {% endif %}
+            {% if alt != '' %} alt="{{ alt }}" {% endif %}
+    >
+{% endmacro %}
+
