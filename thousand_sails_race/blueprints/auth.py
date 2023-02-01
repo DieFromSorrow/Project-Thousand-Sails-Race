@@ -22,11 +22,10 @@ def login():
             # cookie: 一般用来存放登录授权
             # flask中的 session 是经过加密后存储在 cookie
             flash("welcome on")
-            session['user_id'] = user.id
+            session['username'] = user.username
             return redirect("/")
         else:
             flash("密码错误")
-            print("密码错误")
     return render_template('login.html', form=form)
 
 
@@ -48,3 +47,11 @@ def register():
         # return redirect("/auth/login")
         return redirect(url_for("auth.login"))
     return render_template("register.html", form=form)
+
+
+@bp.route('/logout')
+def logout():
+    if 'username' in session:
+        session.pop('username')
+        flash('成功登出')
+    return redirect('/')

@@ -39,7 +39,7 @@
             {% if 'username' not in session %}
             <a class="gotoItm " href="{{ url_for('auth.login') }}" target="_blank">登录</a>
             {% else %}
-            <a class="gotoItm " href="{{ url_for('index.index') }}">个人中心</a>
+            <a class="gotoItm " href="{{ url_for('auth.logout') }}">登出</a>
             {% endif %}
         </div>
         <!-- 结束 导航项 -->
