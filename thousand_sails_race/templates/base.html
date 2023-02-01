@@ -36,8 +36,11 @@
             <a class="gotoItm " href="{{ url_for('index.index') }}">资源库</a>
             <a class="gotoItm " href="{{ url_for('index.index') }}">经验分享</a>
             <a class="gotoItm " href="{{ url_for('index.index') }}">私人定制</a>
-            <a class="gotoItm " href="{{ url_for('index.index') }}">个人中心</a>
+            {% if 'username' not in session %}
             <a class="gotoItm " href="{{ url_for('auth.login') }}" target="_blank">登录</a>
+            {% else %}
+            <a class="gotoItm " href="{{ url_for('index.index') }}">个人中心</a>
+            {% endif %}
         </div>
         <!-- 结束 导航项 -->
     </div>

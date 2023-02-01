@@ -13,7 +13,8 @@ bp = Blueprint("auth", __name__, url_prefix="/auth")
 @bp.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template("login.html")
+        form = LoginForm()
+        return render_template("login.html", form=form)
     else:
         form = LoginForm(request.form)
         if form.validate():
@@ -21,14 +22,14 @@ def login():
             password = form.password.data
             user = UserModel.query.filter_by(email=email).first()
             if not user:
-                print("邮箱在数据库中存在")
+                print("邮箱在数据库中不存在")
                 return redirect(url_for("auth.login"))
             # if check_password_hash(user.password, password):
-            if check_password_hash(user.password,password):
-                # cookie:一般用来存放登录授权
-                # flask中的session是经过加密后存储在cookie
+            if check_password_hash(user.password, password):
+                # cookie: 一般用来存放登录授权
+                # flask中的 session 是经过加密后存储在 cookie
                 flash("welcome on")
-                session['user_id'] = user.id
+                session['username'] = user.username
                 return redirect("/")
             else:
                 print("密码错误")
@@ -38,12 +39,13 @@ def login():
             return redirect(url_for("auth.login"))
 
 
-# GET是从服务器获取数据
+# GET 是从服务器获取数据
 # POST：将客户端的数据提交给服务器
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return render_template("register.html")
+        form = RegisterForm()
+        return render_template("register.html", form=form)
     else:
         # 验证用户提交的邮箱和验证码是否对应且正确
         # 表单验证： flask—wtf：wtforms

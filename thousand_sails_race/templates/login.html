@@ -10,12 +10,12 @@
 {% block content %}
 <div class="login-page">
     <div class="form">
-        <form class="login-form">
-            <input type="text" placeholder="请输入用户名">
-            <input type="password" placeholder="请输入密码">
-            <button type="button">进入</button>
-            <p> </p>
-            <p class="message">点击右侧注册 --->&nbsp;&nbsp;&nbsp;&nbsp;<a href="register.html">注册</a></p>
+        <form class="login-form" method="post">
+            {{ form.csrf_token }}
+            {{ form.email(type='text', placeholder='请输入邮箱') }}
+            {{ form.email(type='passworld', placeholder='请输入密码') }}
+            {{ form.submit() }}
+            <p class="message">点击右侧注册 --->&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('auth.register') }}">注册</a></p>
         </form>
     </div>
 </div>
