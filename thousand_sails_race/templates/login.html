@@ -13,7 +13,13 @@
         <form class="login-form" method="post">
             {{ form.csrf_token }}
             {{ form.email(type='text', placeholder='请输入邮箱') }}
-            {{ form.email(type='passworld', placeholder='请输入密码') }}
+            {% if form.email.errors|length > 0 %}
+                <small class="error">{{ form.email.errors[0] }}</small><br>
+            {% endif %}
+            {{ form.password(type='password', placeholder='请输入密码') }}
+            {% if form.password.errors|length > 0 %}
+                <small class="error">{{ form.password.errors[0] }}</small><br>
+            {% endif %}
             {{ form.submit() }}
             <p class="message">点击右侧注册 --->&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('auth.register') }}">注册</a></p>
         </form>
