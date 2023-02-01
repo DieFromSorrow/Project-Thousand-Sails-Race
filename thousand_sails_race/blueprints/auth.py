@@ -16,6 +16,7 @@ def login():
     if form.validate_on_submit():
         email = form.email.data
         password = form.password.data
+        print(password)
         user = UserModel.query.filter_by(email=email).first()
 
         if check_password_hash(user.password, password):
