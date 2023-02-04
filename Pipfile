@@ -12,6 +12,8 @@ flask-sqlalchemy = "*"
 flask-mail = "*"
 flask-migrate = "*"
 pymysql = "*"
+wtforms = "*"
+sendgrid = "*"
 
 [dev-packages]
 

@@ -67,16 +67,10 @@
     border: none;
 }
 
-.form .meassage a {
+.form .message a {
     color: orange;
     text-decoration: none;
 }
-
-
-/* .register-form
-{
-    display: none;
-} */
 
 .form a {
     text-decoration: none;
@@ -91,6 +85,10 @@
     cursor: pointer;
 }
 
+.error {
+    color: red;
+}
+
 body {
     background-image: url(../images/bj.jpg);
     background-size: cover;
@@ -98,3 +96,4 @@ body {
     font-family: sans-serif;
     /* color: #000; */
 }
+

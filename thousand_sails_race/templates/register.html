@@ -13,11 +13,21 @@
         <form class="register-form" method="post">
             {{ form.csrf_token }}
             {{ form.email(placeholder='邮箱地址') }}
-            <!---->
+            {% if form.email.errors|length > 0 %}
+                <small class="error">{{ form.email.errors[0] }}</small><br>
+            {% endif %}
             {{ form.username(placeholder='请输入用户名') }}
+            {% if form.username.errors|length > 0 %}
+                <small class="error">{{ form.username.errors[0] }}</small><br>
+            {% endif %}
             {{ form.password(placeholder='请输入密码') }}
+            {% if form.password.errors|length > 0 %}
+                <small class="error">{{ form.password.errors[0] }}</small><br>
+            {% endif %}
             {{ form.password_confirm(placeholder='请确认密码') }}
-            <a href="#">获取验证码</a>
+            {% if form.password_confirm.errors|length > 0 %}
+                <small class="error">{{ form.password_confirm.errors[0] }}</small><br>
+            {% endif %}
             {{ form.submit }}
             <p class="message">我们不会把您的信息用于其他用户</p>
         </form>

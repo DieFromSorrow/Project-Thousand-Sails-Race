@@ -1,10 +1,9 @@
-import random
-import string
-from thousand_sails_race.models import EmailCaptchaModel, UserModel
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session, flash
+
+from thousand_sails_race.emails import send_captcha
+from thousand_sails_race.models import UserModel
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session, flash, make_response
 from thousand_sails_race.extends import mail, db
-from flask_mail import Message
-from thousand_sails_race.forms import RegisterForm, LoginForm
+from thousand_sails_race.forms import RegisterForm, CaptchaForm, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
@@ -14,20 +13,18 @@ bp = Blueprint("auth", __name__, url_prefix="/auth")
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
-        print(password)
-        user = UserModel.query.filter_by(email=email).first()
-
-        if check_password_hash(user.password, password):
-            # cookie: 一般用来存放登录授权
-            # flask中的 session 是经过加密后存储在 cookie
-            flash("welcome on")
-            session['username'] = user.username
-            return redirect("/")
-        else:
-            flash("密码错误")
+        flash("welcome on")
+        session['login'] = True
+        return redirect('/')
     return render_template('login.html', form=form)
+
+
+@bp.route('/logout')
+def logout():
+    if 'login' in session:
+        session.pop('login')
+        flash('成功登出')
+    return redirect('/')
 
 
 # GET 是从服务器获取数据
@@ -36,23 +33,35 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        # 验证用户提交的邮箱和验证码是否对应且正确
-        # 表单验证： flask—wtf：wtforms
-        # 返回一个对象
-        email = form.email.data
+        email = form.email.data.lower()
         username = form.username.data
         password = form.password.data
-        user = UserModel(email=email, username=username, password=generate_password_hash(password))
+        session['captcha'] = send_captcha(email)
+        response = make_response(redirect(url_for('auth.captcha')))
+        response.set_cookie(key='email', value=email, max_age=120)
+        response.set_cookie(key='username', value=username, max_age=120)
+        response.set_cookie(key='password', value=generate_password_hash(password), max_age=120)
+        return response
+    return render_template('register.html', form=form)
+
+
+@bp.route('/captcha', methods=['GET', 'POST'])
+def captcha():
+    if 'captcha' not in session:
+        return redirect('/')
+    form = CaptchaForm()
+    if form.validate_on_submit():
+        user = UserModel(
+            email=request.cookies.get('email'),
+            username=request.cookies.get('username'),
+            password=request.cookies.get('password')
+        )
         db.session.add(user)
         db.session.commit()
-        # return redirect("/auth/login")
-        return redirect(url_for("auth.login"))
-    return render_template("register.html", form=form)
-
-
-@bp.route('/logout')
-def logout():
-    if 'username' in session:
-        session.pop('username')
-        flash('成功登出')
-    return redirect('/')
+        flash('注册成功')
+        response = make_response(redirect('/'))
+        response.delete_cookie('email')
+        response.delete_cookie('username')
+        response.delete_cookie('password')
+        return redirect('/')
+    return render_template('captcha.html', form=form)

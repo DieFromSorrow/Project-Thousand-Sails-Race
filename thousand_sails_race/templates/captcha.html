@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+
+{% block title %}邮箱验证{% endblock %}
+
+{% block styles %}
+    {{ static_file('css', 'register_login.css') }}
+{% endblock %}
+
+{% block content %}
+<div class="login-page">
+    <div class="form">
+        <form class="register-form" method="post">
+            {{ form.csrf_token }}
+            <p class="message">验证码已发送至您的邮箱，请注意查收</p>
+            {{ form.captcha(placeholder='请输入验证码') }}
+            {% if form.captcha.errors|length > 0 %}
+                <small class="error">{{ form.password_confirm.errors[0] }}</small><br>
+            {% endif %}
+            {{ form.submit }}
+        </form>
+    </div>
+</div>
+{% endblock %}

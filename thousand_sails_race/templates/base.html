@@ -15,6 +15,7 @@
     {{ static_file('css', 'base.css') }}
     {{ static_file('icon', 'favicon2.ico') }}
     {% block styles %}{% endblock %}
+    {% block scripts %}{% endblock %}
 </head>
 
 <body>
@@ -36,8 +37,8 @@
             <a class="gotoItm " href="{{ url_for('index.index') }}">资源库</a>
             <a class="gotoItm " href="{{ url_for('index.index') }}">经验分享</a>
             <a class="gotoItm " href="{{ url_for('index.index') }}">私人定制</a>
-            {% if 'username' not in session %}
-            <a class="gotoItm " href="{{ url_for('auth.login') }}" target="_blank">登录</a>
+            {% if 'login' not in session %}
+            <a class="gotoItm " href="{{ url_for('auth.login') }}">登录</a>
             {% else %}
             <a class="gotoItm " href="{{ url_for('auth.logout') }}">登出</a>
             {% endif %}
