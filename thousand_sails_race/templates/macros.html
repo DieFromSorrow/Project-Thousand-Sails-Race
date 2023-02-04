@@ -9,8 +9,8 @@
         {% elif type == 'icon' %}
             {% set predict_name = 'images/' %}
         {% endif %}
+        {% set filename_or_url = url_for('static', filename=predict_name+filename_or_url) %}
     {% endif %}
-    {% set filename_or_url = url_for('static', filename=predict_name+filename_or_url) %}
     {% if type == 'css' %}
         <link rel="stylesheet" href="{{ filename_or_url }}" type="text/css">
     {% elif type == 'js' %}

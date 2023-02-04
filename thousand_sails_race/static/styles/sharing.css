@@ -1,0 +1,71 @@
+body {
+    background: #f8f8f8;
+}
+
+
+/* .w {
+    width: 1200px;
+    margin: 78px auto 0;
+} */
+
+.tag.is-lightblue {
+    color: #2d84cc;
+    background: #ebf3fb;
+}
+
+.ml-10 {
+    margin-left: 1rem;
+}
+
+.lh-20 {
+    line-height: 2rem;
+}
+
+.card {
+    margin-bottom: 1rem;
+}
+
+.section {
+    padding-top: 1rem;
+}
+
+.fa-15 {
+    font-size: 1.5rem;
+}
+
+.fa.fa-fire {
+    font-size: 1.2rem;
+    /* color: red; */
+    margin-left: 1rem;
+}
+
+.fp {
+    color: rgba(252, 73, 70);
+}
+
+.fs {
+    color: rgba(250, 113, 22);
+}
+
+.ft {
+    color: rgba(247, 181, 0);
+}
+
+.section {
+    margin-top: -40px;
+}
+
+.section1 {
+    margin-top: -45px;
+}
+
+.ser_box {
+    width: 1200px;
+    height: 100px;
+    margin: 77px auto 0;
+    /* background-color: #2d84cc; */
+}
+
+.field {
+    margin: 33px auto;
+}

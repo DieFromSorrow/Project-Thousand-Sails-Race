@@ -1,10 +1,17 @@
-from flask import Flask, session, g, render_template, flash, redirect, url_for
+from flask import Flask
 from thousand_sails_race import settings
 from thousand_sails_race.extends import db, mail
 from thousand_sails_race.models import UserModel
+
 from thousand_sails_race.blueprints.auth import bp as auth_bp
+from thousand_sails_race.blueprints.news import bp as news_bp
 from thousand_sails_race.blueprints.index import bp as index_bp
+from thousand_sails_race.blueprints.races import bp as races_bp
+from thousand_sails_race.blueprints.sharing import bp as sharing_bp
+from thousand_sails_race.blueprints.library import bp as library_bp
+
 from flask_migrate import Migrate
+
 
 app = Flask(__name__)
 
@@ -22,5 +29,9 @@ migrate = Migrate(app, db)
 
 # 绑定
 app.register_blueprint(auth_bp)
+app.register_blueprint(news_bp)
 app.register_blueprint(index_bp)
+app.register_blueprint(races_bp)
+app.register_blueprint(sharing_bp)
+app.register_blueprint(library_bp)
 

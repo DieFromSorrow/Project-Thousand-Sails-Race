@@ -1,0 +1,354 @@
+
+{% extends 'base.html' %}
+
+{% block title %}经验分享{% endblock %}
+
+{% block styles %}
+    {{ static_file('css', 'sharing.css') }}
+    {{ static_file('css', 'https://cdn.bootcss.com/bulma/0.6.1/css/bulma.min.css', local=False) }}
+    {{ static_file('css', 'https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css', local=False) }}
+{% endblock %}
+
+{% block content %}
+
+<!-- 文章 开始 -->
+
+<!-- 搜索框 start -->
+<div class="ser_box">
+    <div class="navbar-item">
+        <div class="field is-grouped">
+            <div class="control has-icons-right">
+                <input type="text" class="input" style="width: 20rem;" placeholder="搜索你感兴趣的内容...">
+                <span class="icon is-right"><i class="fa fa-search"></i></span>
+            </div>
+            <div class="control">
+                <input type="submit" class="button is-info" value="搜索">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 搜索框 end -->
+<div class="section">
+    <div class="container">
+        <div class="tile">
+            <div class="tile is-vertical is-parent is-8">
+                <div class="box">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-96x96">
+                                {{ img('64x64.png') }}
+                            </figure>
+                        </div>
+                        <div class="media-content lh-20">
+                            <p><strong>大学生数学竞赛</strong> <span class="tag is-lightblue">专栏</span></p>
+                            <p>
+                                69篇精华内容
+                                <button class="button is-info is-pulled-right">关注专栏</button>
+                            </p>
+                            <p><a href="#">查看更多</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile is-vertical is-parent">
+                <div class="card">
+                    <div class="card-header">
+                        <p class="card-header-title">石家庄铁道大学千帆竞发项目组</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-64x64">
+                                    {{ img('666.png') }}
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p>
+                                    <strong>经验分享</strong>
+                                    <span class="tag is-gray">专栏</span></p>
+                                <p>
+                                    999+ 篇文章
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header">
+                        <p class="card-header-title">热门文章</p>
+                    </div>
+                    <div class="card-content">
+                        <ul class="lh-20">
+                            <li><a href="#">互联网加大赛</a><i class="fa fa-fire fp"></i></li>
+                            <li><a href="#">互联网加大赛</a><i class="fa fa-fire fs"></i></li>
+                            <li><a href="#">互联网加大赛</a><i class="fa fa-fire ft"></i></li>
+                            <li><a href="#">互联网加大赛</a></li>
+                            <li><a href="#">互联网加大赛</a></li>
+                            <li><a href="#">互联网加大赛</a></li>
+                            <li><a href="#">互联网加大赛</a></li>
+                            <li><a href="#">互联网加大赛</a></li>
+                            <li><a href="#">互联网加大赛</a></li>
+                            <li><a href="#">互联网加大赛</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container -->
+</div>
+
+<div class="section1">
+    <div class="container">
+        <div class="tile">
+            <div class="tile is-vertical is-parent is-8">
+                <div class="box">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-96x96">
+                                {{ img('caihong.png') }}
+                            </figure>
+                        </div>
+                        <div class="media-content lh-20">
+                            <p><strong>大学生英语竞赛</strong> <span class="tag is-lightblue">专栏</span></p>
+                            <p>
+                                9篇精华内容
+                                <button class="button is-info is-pulled-right">关注专栏</button>
+                            </p>
+                            <p><a href="#">查看更多</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生英语竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生英语竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生英语竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生英语竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生英语竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p><strong><a>大学生英语竞赛的经验分享</a></strong></p>
+                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p>
+                                    <a class="tag is-medium is-lightblue has-addons">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        <span class="icon is-medium">763</span>
+                                    </a>
+                                    <a class="tag is-medium is-lightblue">
+                                        <i class="fa fa fa-thumbs-down"></i>
+                                        <span class="icon is-medium">22</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container -->
+</div>
+<!-- 文章 结束 -->
+
+{% endblock %}

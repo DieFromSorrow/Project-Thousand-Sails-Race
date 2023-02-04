@@ -6,7 +6,7 @@ from thousand_sails_race.extends import mail, db
 from thousand_sails_race.forms import RegisterForm, CaptchaForm, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
-bp = Blueprint("auth", __name__, url_prefix="/auth")
+bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 @bp.route("/login", methods=['GET', 'POST'])

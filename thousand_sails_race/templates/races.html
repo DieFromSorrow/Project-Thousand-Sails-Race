@@ -1,0 +1,175 @@
+
+{% extends 'base.html' %}
+
+{% block title %}竞赛信息{% endblock %}
+
+{% block styles %}
+    {{ static_file('css', 'races.css') }}
+{% endblock %}
+
+{% block scripts %}
+    {{ static_file('js', 'animate.js') }}
+    {{ static_file('js', 'rotation_chart.js') }}
+    {{ static_file('js', 'races_library.js') }}
+{% endblock %}
+
+{% block content %}
+
+<!-- 轮播图 start -->
+<div class="focus ">
+    <!-- 左侧按钮 -->
+    <a href="javascript:;" class="arrow-l">&lt;</a>
+    <!-- 右侧按钮 -->
+    <a href="javascript:;" class="arrow-r"> &gt; </a>
+    <!-- 核心的滚动区域 -->
+    <ul>
+        <li>
+            <a href="#">
+                {{ img('focus0.jpg') }}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                {{ img('focus1.jpg') }}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                {{ img('focus2.jpg') }}
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                {{ img('focus3.jpg') }}
+            </a>
+        </li>
+    </ul>
+    <!-- 小圆圈 -->
+    <ol class="circle">
+
+    </ol>
+</div>
+<!-- 轮播图 end -->
+
+<!-- 竞赛 start -->
+<div class="tab_box">
+    <div class="tab">
+        <div class="tab_list">
+            <ul>
+                <li>热门竞赛</li>
+                <li class="current">A类竞赛</li>
+                <li>B类竞赛</li>
+                <li>非A、B类竞赛</li>
+
+            </ul>
+        </div>
+        <div class="tab_con">
+            <div class="item1">
+                <div class="dropdown-content">
+                    <a href="#"><span>热门竞赛top1~10</span><span>比赛时间2023.6.6</span><span >点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                </div>
+            </div>
+            <div class="item1" style="display: block;">
+                <div class="dropdown-content">
+                    <a href="#"><span>A类竞赛</span><span>比赛时间</span><span class="more">点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <a href="#"><span>全国大学生数学竞赛</span><span></span><span></span></a>
+                    <div class="paging">
+                        <span class="on">1</span>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">7</a>
+                        <a href="#">8</a>
+                        <a href="#">9</a>
+                        <a href="#" rel="next">→</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item1">
+                <div class="dropdown-content">
+                    <a href="#"><span>B类竞赛</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <div class="paging">
+                        <span class="on">1</span>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">7</a>
+                        <a href="#">8</a>
+                        <a href="#">9</a>
+                        <a href="#" rel="next">→</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item1">
+                <div class="dropdown-content">
+                    <a href="#"><span>非A、B类竞赛</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
+                    <div class="paging">
+                        <span class="on">1</span>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">7</a>
+                        <a href="#">8</a>
+                        <a href="#">9</a>
+                        <a href="#" rel="next">→</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab_right">
+            <div class="tab_right_1"></div>
+            <!-- <div class="tab_right_2"></div>
+            <div class="tab_right_3"></div>
+            <div class="tab_right_4"></div> -->
+        </div>
+    </div>
+</div>
+
+<!-- 竞赛 end -->
+
+{% endblock %}
+

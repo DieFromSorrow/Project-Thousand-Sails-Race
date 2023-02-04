@@ -13,7 +13,7 @@
     </title>
     {{ static_file('css', 'init.css') }}
     {{ static_file('css', 'base.css') }}
-    {{ static_file('icon', 'favicon2.ico') }}
+    {{ static_file('icon', 'jing.ico') }}
     {% block styles %}{% endblock %}
     {% block scripts %}{% endblock %}
 </head>
@@ -27,15 +27,15 @@
                 {{ img('logo1.jpg', class="xd_logo") }}
             </div>
         </div>
-        <!-- 结束 LOGO-站名  -->
+        <!-- 结束 LOGO-站名 -->
 
         <!-- 开始 导航项 -->
         <div class="goto ">
             <a class="gotoItm " href="{{ url_for('index.index') }}">首页</a>
-            <a class="gotoItm " href="{{ url_for('index.index') }}">新闻公告</a>
-            <a class="gotoItm " href="{{ url_for('index.index') }}">竞赛信息</a>
-            <a class="gotoItm " href="{{ url_for('index.index') }}">资源库</a>
-            <a class="gotoItm " href="{{ url_for('index.index') }}">经验分享</a>
+            <a class="gotoItm " href="{{ url_for('news.news') }}">新闻公告</a>
+            <a class="gotoItm " href="{{ url_for('races.races') }}">竞赛信息</a>
+            <a class="gotoItm " href="{{ url_for('library.library') }}">资源库</a>
+            <a class="gotoItm " href="{{ url_for('sharing.sharing') }}">经验分享</a>
             <a class="gotoItm " href="{{ url_for('index.index') }}">私人定制</a>
             {% if 'login' not in session %}
             <a class="gotoItm " href="{{ url_for('auth.login') }}">登录</a>
@@ -47,9 +47,9 @@
     </div>
     <!-- 结束 顶栏  -->
 
+
     {% block content %}
     {% endblock %}
-
 
 
     <!-- 结束 底部栏 -->
