@@ -24,7 +24,7 @@ class StduModel(db.Model):
 
 # 团队——指导教师信息表:id,姓名、性别、职务、获奖情况
 class TeacherModel(db.Model):
-    __tablename__ = "teacinfo"
+    __tablename__ = "teachinfo"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     stduname = db.Column(db.String(50), nullable=False)
     sex = db.Column(db.String(10), nullable=False)
