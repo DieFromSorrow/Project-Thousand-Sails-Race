@@ -17,49 +17,48 @@ class StduModel(db.Model):
     __tablename__ = "stduinfo"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     stduname = db.Column(db.String(50), nullable=False)
-    sex=db.Column(db.String(10), nullable=False)
+    sex = db.Column(db.String(10), nullable=False)
     education = db.Column(db.String(200), nullable=False)
     awards = db.Column(db.Text, nullable=False)
 
 
-
 # 团队——指导教师信息表:id,姓名、性别、职务、获奖情况
 class TeacherModel(db.Model):
-    __tablename__ = "teachinfo"
+    __tablename__ = "teacinfo"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     stduname = db.Column(db.String(50), nullable=False)
-    sex=db.Column(db.String(10), nullable=False)
+    sex = db.Column(db.String(10), nullable=False)
     duty = db.Column(db.String(200), nullable=False)
     awards = db.Column(db.Text, nullable=False)
 
 
-# 邮箱验证码表
+'''# 邮箱验证码表
 class EmailCaptchaModel(db.Model):
     __tablename__ = "email_captcha"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(100), nullable=False)
-    captcha = db.Column(db.String(100), nullable=False)
+    captcha = db.Column(db.String(100), nullable=False)'''
 
 
 # 赛事表--id,竞赛名称、主办方、开始时间、结束时间、竞赛详情
 class RaceinfoModel(db.Model):
-    __tablename__="raceinfo"
-    id= db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name=db.Column(db.String(200), nullable=False)
-    sponsor=db.Column(db.String(100), nullable=False)
+    __tablename__ = "raceinfo"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(200), nullable=False)
+    sponsor = db.Column(db.String(100), nullable=False)
     type = db.Column(db.String(100), nullable=False)
-    start_time=db.Column(db.DateTime)
-    end_time=db.Column(db.DateTime)
-    details=db.Column(db.Text, nullable=False)
+    start_time = db.Column(db.DateTime)
+    end_time = db.Column(db.DateTime)
+    details = db.Column(db.Text, nullable=False)
 
 
 # 新闻公告表--id,新闻主题、新闻内容、发布时间
-class NewinfoModel(db.Model):
-    __tablename__="newsinfo"
-    id= db.Column(db.Integer, primary_key=True, autoincrement=True)
-    newstheme=db.Column(db.String(200), nullable=False)
+class NewsinfoModel(db.Model):
+    __tablename__ = "newsinfo"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    newstheme = db.Column(db.String(200), nullable=False)
     newscontent = db.Column(db.Text, nullable=False)
-    news_time=db.Column(db.DateTime)
+    news_time = db.Column(db.DateTime)
 
     # 外键--新闻公告对应的某个比赛
     raceinfo_id = db.Column(db.Integer, db.ForeignKey("raceinfo.id"))
@@ -69,13 +68,13 @@ class NewinfoModel(db.Model):
 # 经验贴--id,经验类型、发布时间
 class ExperienceModel(db.Model):
     __tablename__="experinfo"
-    id= db.Column(db.Integer, primary_key=True, autoincrement=True)
-    type=db.Column(db.String(200), nullable=False)
-    expe_time=db.Column(db.DateTime)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    type = db.Column(db.String(200), nullable=False)
+    expe_time = db.Column(db.DateTime)
 
     # 外键--发表人
-    stdu_id=db.Column(db.Integer, db.ForeignKey("stduinfo.id"))
-    teach_id=db.Column(db.Integer, db.ForeignKey("teachinfo.id"))
+    stdu_id = db.Column(db.Integer, db.ForeignKey("stduinfo.id"))
+    teach_id = db.Column(db.Integer, db.ForeignKey("teachinfo.id"))
 
 
 # 发表问题--id,题目、内容、发表时间

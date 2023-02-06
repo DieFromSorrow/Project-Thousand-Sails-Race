@@ -1,5 +1,5 @@
 
-from flask import current_app, session
+from flask import current_app
 from thousand_sails_race.extends import mail
 from flask_mail import Message
 from threading import Thread
@@ -12,7 +12,7 @@ def _send_async_mail(_app, _message):
 
 
 def send_async_mail(subject, to, body):
-    message = Message(subject=subject, recipients=[to], body=body)
+    message = Message(subject=subject, recipients=[to], html=body)
     _app = current_app._get_current_object()
     thr = Thread(target=_send_async_mail, args=[_app, message])
     thr.start()

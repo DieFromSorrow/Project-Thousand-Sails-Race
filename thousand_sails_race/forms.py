@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 import wtforms
 from wtforms.validators import Email, Length, EqualTo, InputRequired
-from thousand_sails_race.models import UserModel, EmailCaptchaModel
+from thousand_sails_race.models import UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import session
 from thousand_sails_race.extends import db
