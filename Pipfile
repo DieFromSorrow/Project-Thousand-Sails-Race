@@ -16,6 +16,7 @@ wtforms = "*"
 sendgrid = "*"
 
 [dev-packages]
+faker = "*"
 
 [requires]
 python_version = "3.9"

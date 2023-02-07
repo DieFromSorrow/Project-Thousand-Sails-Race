@@ -1,5 +1,6 @@
 from thousand_sails_race.extends import db
 from datetime import datetime
+from werkzeug.security import generate_password_hash
 
 
 # 用户信息表
@@ -10,6 +11,9 @@ class UserModel(db.Model):
     password = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     join_time = db.Column(db.DateTime, default=datetime.now)
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
 
 
 # 团队——学生信息表:id,姓名、性别、学历、获奖情况
