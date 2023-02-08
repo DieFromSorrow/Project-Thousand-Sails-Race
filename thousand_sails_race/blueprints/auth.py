@@ -31,6 +31,9 @@ def logout():
 # POST：将客户端的数据提交给服务器
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
+    if 'captcha' in session:
+        flash('120s 内只能进行一次注册操作')
+        return redirect(url_for('login'))
     form = RegisterForm()
     if form.validate_on_submit():
         email = form.email.data.lower()
