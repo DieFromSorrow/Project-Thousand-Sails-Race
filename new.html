@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="css/init.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/new.css">
-
+    <link href="https://cdn.bootcss.com/bulma/0.6.1/css/bulma.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -31,13 +32,36 @@
             <a class="gotoItm " href="zi-yuan-ku.html">资源库</a>
             <a class="gotoItm " href="share.html">经验分享</a>
             <a class="gotoItm " href="#">私人定制</a>
-            <a class="gotoItm " href="#">个人中心</a>
+            <!-- <a class="gotoItm " href="#">个人中心</a> -->
+            <div class="dropdown1 gotoItm">
+                <button class="dropbtn1">个人中心</button>
+                <div class="dropdown-content1">
+                    <a href="#">退出登录</a>
+                    <a href="#">邮箱</a>
+                </div>
+            </div>
             <a class="gotoItm " href="login.html" target="_blank">登录</a>
         </div>
         <!-- 结束 导航项 -->
     </div>
     <!-- 结束 顶栏  -->
 
+
+    <!-- 搜索开始 -->
+    <div class="ser_box">
+        <div class="navbar-item">
+            <div class="field is-grouped">
+                <div class="control has-icons-right">
+                    <input type="text" class="input" style="width: 20rem;" placeholder="搜索你感兴趣的内容...">
+                    <span class="icon is-right"><i class="fa fa-search"></i></span>
+                </div>
+                <div class="control">
+                    <input type="submit" class="button is-info" value="搜索">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 搜索结束 -->
 
     <!-- news start -->
     <div class="block" style="z-index: 100;">
