@@ -4,7 +4,11 @@ function put(data) {
     let begin_id = data['begin_id']
     let end_id = data['end_id']
     let all_num = data['all_num']
-    let races = '<div class="jingsaibox"><div class="jchild1">' + type.charAt(-1)
+    let type_name = type.charAt(5)
+    if (type_name === 'N') {
+        type_name = '非A、B'
+    }
+    let races = '<div class="jingsaibox"><div class="jchild1">' + type_name
         + '类竞赛</div><div class="jchild2">比赛时间</div><div class="jchild3">赞助商</div></div>'
 
     let info = data['races_info']
