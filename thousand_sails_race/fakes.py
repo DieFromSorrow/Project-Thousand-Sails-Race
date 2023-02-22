@@ -39,7 +39,7 @@ def fake_user(count=10):
     db.session.commit()
 
 
-def fake_race(count=40):
+def fake_race(count=160):
     for i in range(count):
         race = RaceinfoModel(
             name=fake.sentence(
@@ -48,7 +48,7 @@ def fake_race(count=40):
                 ext_word_list=None
             ),
             sponsor=fake.company(),
-            type=fake.word(ext_word_list=None),
+            type=['A', 'B', 'N'][random.randint(0, 2)],
             start_time=fake.date_time_this_year(
                 before_now=True,
                 after_now=False,
@@ -63,7 +63,8 @@ def fake_race(count=40):
                 nb_sentences=8,
                 variable_nb_sentences=True,
                 ext_word_list=None
-            )
+            ),
+            href=fake.url()
         )
         db.session.add(race)
     db.session.commit()

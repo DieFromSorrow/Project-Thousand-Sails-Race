@@ -87,7 +87,8 @@
 }
 
 .tab {
-    width: 978px;
+    /* width: 978px; */
+    width: 1200px;
 }
 
 .tab_list {
@@ -126,10 +127,11 @@
     z-index: 1;
 }
 
-.dropdown-content a {
+
+/* .dropdown-content a {
     color: black;
     padding: 12px 16px;
-    width: 945px;
+    width: 1169px;
     text-decoration: none;
     display: block;
     border-bottom: 1px solid #ccc;
@@ -137,7 +139,7 @@
 
 .dropdown-content a:hover {
     background-color: #ccc;
-}
+} */
 
 
 /* 标签页 */
@@ -215,4 +217,37 @@
     height: 200px;
     /* background-color: green; */
     background: url(../images/bj.jpg);
+}
+
+.jchild1 {
+    float: left;
+    width: 380px;
+    line-height: 50px;
+    padding-left: 20px;
+}
+
+.jchild2 {
+    float: left;
+    width: 400px;
+    line-height: 50px;
+}
+
+.jchild3 {
+    float: left;
+    width: 400px;
+    line-height: 50px;
+}
+
+.jingsaibox {
+    border-bottom: 1px solid #ccc;
+    width: 1200px;
+    height: 50px;
+}
+
+.jingsaibox a {
+    color: black;
+}
+
+.jingsaibox:hover {
+    background-color: #ccc;
 }

@@ -19,7 +19,6 @@ window.addEventListener('load', function() {
             this.className = 'current';
             // 2. 下面的显示内容模块
             var index = this.getAttribute('index');
-            console.log(index);
             // 干掉所有人 让其余的item 这些div 隐藏
             for (var i = 0; i < items.length; i++) {
                 items[i].style.display = 'none';

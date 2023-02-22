@@ -1,4 +1,6 @@
+
 <!-- 宏 -->
+
 
 {% macro static_file(type, filename_or_url, local=True) %}
     {% if local %}
@@ -28,5 +30,54 @@
             {% if class != '' %} class="{{ class }}" {% endif %}
             {% if alt != '' %} alt="{{ alt }}" {% endif %}
     >
+{% endmacro %}
+
+
+{% macro page_numbers_ENDPOINT(endpoint, opnn, all_num, begin_id, end_id) %}
+    {% set opnn = opnn %} <!-- one_page_numbers_num -->
+    {% if (begin_id % opnn == 1) and ((end_id - begin_id == (opnn - 1)) or (end_id == all_num)) %}
+    <div class="paging">
+        {% for i in range(1, all_num, opnn) %}
+            {% if i == begin_id %}
+                <span class="on">{{ loop.index }}</span>
+            {% else %}
+                {% if loop.last %}
+                    {% set idx_url = url_for(endpoint, begin_id=i, end_id=all_num) %}
+                {% else %}
+                    {% set idx_url = url_for(endpoint, begin_id=i, end_id=(i + opnn - 1)) %}
+                {% endif %}
+                <a href="{{ idx_url }}">{{ loop.index }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if end_id != all_num %}
+            {% set next_url = url_for(endpoint, begin_id=(begin_id + opnn), end_id=(end_id + opnn)) %}
+            <a href="{{ next_url }}" rel="next">下一页</a>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endmacro %}
+
+
+{% macro page_numbers_AJAX(func_name, endpoint, opnn, all_num, begin_id, end_id, type) %}
+    {% set opnn = opnn %}
+    <div class="paging">
+        {% for i in range(1, all_num, opnn) %}
+            {% if i == begin_id %}
+                <span class="on">{{ loop.index }}</span>
+            {% else %}
+                {% if loop.last %}
+                    {% set idx_url = url_for(endpoint, begin_id=i, end_id=all_num, type=type) %}
+                {% else %}
+                    {% set idx_url = url_for(endpoint, begin_id=i, end_id=(i + opnn - 1), type=type) %}
+                {% endif %}
+                <input type="button" value="{{ loop.index }}" onclick="{{ fanc_name }}(url={{ idx_url }})">
+                <a onclick="{{ AJAX_send(url=idx_url, func=func_name) }}">loop.index</a>
+            {% endif %}
+        {% endfor %}
+        {% if end_id != all_num %}
+            {% set next_url = url_for(endpoint, begin_id=(begin_id + opnn), end_id=(end_id + opnn), type=type) %}
+            <a rel="next" onclick="{{ AJAX_send(url=next_url, func=func_name) }}">下一页</a>
+        {% endif %}
+    </div>
 {% endmacro %}
 

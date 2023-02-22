@@ -13,6 +13,7 @@ def get_news_num():
 
 @bp.route('/')
 def news():
+    begin_id = end_id = None
     try:
         begin_id = int(request.args.get('begin_id'))
         end_id = int(request.args.get('end_id'))
@@ -21,9 +22,9 @@ def news():
     except ValueError:
         flash('参数有误')
         return redirect('/')
-
-    _news = NewsinfoModel.query.filter(NewsinfoModel.id >= begin_id) \
-        .filter(NewsinfoModel.id <= end_id).all()
-    return render_template('news.html', news=_news,
-                           begin_id=begin_id, end_id=end_id,
-                           all_news_num=g.get('news_num'))
+    finally:
+        _news = NewsinfoModel.query.filter(NewsinfoModel.id >= begin_id) \
+            .filter(NewsinfoModel.id <= end_id).all()
+        return render_template('news.html', news=_news,
+                               begin_id=begin_id, end_id=end_id,
+                               all_news_num=g.get('news_num'))

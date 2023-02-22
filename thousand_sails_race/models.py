@@ -54,6 +54,7 @@ class RaceinfoModel(db.Model):
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
     details = db.Column(db.Text, nullable=False)
+    href = db.Column(db.String(50), nullable=False)
 
 
 # 新闻公告表--id,新闻主题、新闻内容、发布时间

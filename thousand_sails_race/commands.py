@@ -18,7 +18,7 @@ def initdb(drop):
 
 @app.cli.command()
 @click.option('--user', default=10, help='Quantity of users, default is 10.')
-@click.option('--race', default=40, help='Quantity of races, default is 40.')
+@click.option('--race', default=40, help='Quantity of races, default is 160.')
 @click.option('--news', default=60, help='Quantity of news, default is 60.')
 def forge(user, race, news):
     """Generate fake data"""

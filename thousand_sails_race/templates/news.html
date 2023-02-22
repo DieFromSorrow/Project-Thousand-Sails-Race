@@ -1,6 +1,8 @@
 
 {% extends 'base.html' %}
 
+{% from 'macros.html' import page_numbers_ENDPOINT %}
+
 {% block title %}新闻公告{% endblock %}
 
 {% block styles %}
@@ -33,26 +35,8 @@
     </div>
 </div>
 
-{% set opnn = 10 %} <!-- one_page_news_num -->
-{% if (begin_id % opnn == 1) and ((end_id - begin_id == (opnn - 1)) or (end_id == all_news_num)) %}
-<div class="paging">
-    {% for i in range(1, all_news_num, opnn) %}
-        {% if i == begin_id %}
-            <span class="on">{{ loop.index }}</span>
-        {% else %}
-            {% if loop.last %}
-                {% set idx_url = url_for('news.news', begin_id=i, end_id=all_news_num) %}
-            {% else %}
-                {% set idx_url = url_for('news.news', begin_id=i, end_id=(i + opnn - 1)) %}
-            {% endif %}
-            <a href="{{ idx_url }}">{{ loop.index }}</a>
-        {% endif %}
-    {% endfor %}
-    {% if end_id != all_news_num %}
-        {% set next_url = url_for('news.news', begin_id=(begin_id + opnn), end_id=(end_id + opnn)) %}
-        <a href="{{ next_url }}" rel="next">下一页</a>
-    {% endif %}
-</div>
-{% endif %}
+
+{{ page_numbers_ENDPOINT('news.news', opnn=10, all_num=all_news_num, begin_id=begin_id, end_id=end_id) }}
+
 
 {% endblock %}
