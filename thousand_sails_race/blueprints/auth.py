@@ -33,7 +33,7 @@ def logout():
 def register():
     if 'captcha' in session:
         flash('120s 内只能进行一次注册操作')
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
     form = RegisterForm()
     if form.validate_on_submit():
         email = form.email.data.lower()

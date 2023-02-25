@@ -77,3 +77,17 @@
     border-color: #0d59a7;
     color: #fff;
 }
+
+.ser_box {
+    width: 1200px;
+    height: 100px;
+    margin: 77px auto -70px;
+}
+
+.field {
+    margin: 33px auto;
+}
+
+.button.is-info {
+    background-color: #3273dc !important;
+}
