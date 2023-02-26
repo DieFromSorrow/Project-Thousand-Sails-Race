@@ -17,13 +17,15 @@
 <div class="ser_box">
     <div class="navbar-item">
         <div class="field is-grouped">
+            <form method="GET" action="{{ url_for('news.search') }}">
             <div class="control has-icons-right">
-                <input type="text" class="input" style="width: 20rem;" placeholder="搜索你感兴趣的内容...">
+                <input type="search" class="input" style="width: 20rem;" placeholder="搜索你感兴趣的内容..." name="q">
                 <span class="icon is-right"><i class="fa fa-search"></i></span>
             </div>
             <div class="control">
-                <input type="submit" class="button is-info" value="搜索">
+                <button type="submit" class="button is-info">搜索</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -55,6 +57,7 @@
 
 
 {{ page_numbers_ENDPOINT('news.news', opnn=10, all_num=all_news_num, begin_id=begin_id, end_id=end_id) }}
+{#{{ page_numbers_ENDPOINT('news.news', begin_id=begin_id, end_id=end_id) }}#}
 
 
 {% endblock %}
