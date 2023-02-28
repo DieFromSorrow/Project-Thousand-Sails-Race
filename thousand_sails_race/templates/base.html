@@ -40,9 +40,16 @@
             {% if 'login' not in session %}
             <a class="gotoItm " href="{{ url_for('auth.login') }}">登录</a>
             {% else %}
-            <a class="gotoItm " href="{{ url_for('auth.logout') }}">登出</a>
+            <div class="dropdown1 gotoItm">
+                <button class="dropbtn1">个人中心</button>
+                <div class="dropdown-content1">
+                    <a href="{{ url_for('auth.logout') }}">退出登录</a>
+                    <a href="#">邮箱</a>
+                </div>
+            </div>
             {% endif %}
         </div>
+        &nbsp&nbsp&nbsp&nbsp
         <!-- 结束 导航项 -->
     </div>
     <!-- 结束 顶栏  -->
