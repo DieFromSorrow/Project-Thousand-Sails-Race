@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问答平台</title>
+    <link rel="stylesheet" href="css/bootstrap.4.6.min.css">
+    <link rel="stylesheet" href="css/wendaDetail.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">知了问答</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">发布问答</a>
+                    </li>
+                    <li class="nav-item ml-2">
+                        <form class="form-inline my-2 my-lg-0" method="GET" action="#">
+                            <input class="form-control mr-sm-2" type="search" placeholder="关键字" aria-label="Search" name="q">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <span class="nav-link"></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">退出登录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">登录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">注册</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col"></div>
+            <div class="col-10" style="background-color: #fff;padding: 20px;">
+                <h3 class="page-title">{{ question.title }}</h3>
+                <p class="question-info">
+                    <span>作者：{{ question.author.username }}</span>
+                    <span>时间：{{ question.create_time }}</span>
+                </p>
+                <hr>
+                <p class="question-content">{{ question.content }}</p>
+                <hr>
+                <h4 class="comment-group-title">评论（{{ question.answers|length }}）：</h4>
+                <form action="{{ url_for('da.public_answer') }}" method="post">
+                    <div class="form-group">
+                        <input type="text" placeholder="请填写评论" name="content" class="form-control">
+                        <input type="hidden" name="question_id" value="{{ question.id }}">
+                    </div>
+                    <div class="form-group" style="text-align: right;">
+                        <button class="btn btn-primary">评论</button>
+                    </div>
+                </form>
+                <ul class="comment-group">
+
+                    <li>
+                        <div class="user-info">
+                            <img class="avatar" src="images/avatar.jpg" alt="">
+                            <span class="username">{{answer.author.username}}</span>
+                            <span class="create-time">{{ answer.create_time }}</span>
+                        </div>
+                        <p class="comment-content">{{answer.content}}</p>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</body>
+
+</html>
