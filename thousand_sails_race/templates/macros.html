@@ -81,3 +81,23 @@
     </div>
 {% endmacro %}
 
+
+{% macro rotation_chart(imgs_info) %}
+    <div class="focus ">
+        <!-- 左侧按钮 -->
+        <a href="javascript:;" class="arrow-l">&lt;</a>
+        <!-- 右侧按钮 -->
+        <a href="javascript:;" class="arrow-r"> &gt; </a>
+        <!-- 核心的滚动区域 -->
+        <ul>
+            {% for img_fn, url in imgs_info.items() %}
+                <li><a href="{{ url }}">
+                    {{ img(img_fn) }}
+                </a></li>
+            {% endfor %}
+        </ul>
+        <!-- 小圆圈 -->
+        <ol class="circle"></ol>
+    </div>
+{% endmacro %}
+

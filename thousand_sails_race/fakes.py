@@ -94,4 +94,21 @@ def fake_news(count=60):
     db.session.commit()
 
 
-
+def fake_libs(count=100):
+    for i in range(count):
+        lib = LibsinfoModel(
+            name=fake.sentence(
+                nb_words=8,
+                variable_nb_words=True,
+                ext_word_list=None
+            ),
+            type=['PPT', 'PPP', 'CQB'][random.randint(0, 2)],
+            time=fake.date_time_this_year(
+                before_now=False,
+                after_now=True,
+                tzinfo=None
+            ),
+            href=fake.url()
+        )
+        db.session.add(lib)
+    db.session.commit()

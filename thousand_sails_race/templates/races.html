@@ -14,51 +14,27 @@
     {{ static_file('js', 'races_library.js') }}
     {{ static_file('js', 'AJAX_send.js') }}
     {{ static_file('js', 'put_races_info.js') }}
-    <script>
+
+    <script type="text/javascript">
     function begin () {
         AJAX_send('http://127.0.0.1:5000/races/races_info?begin_id=1&end_id=10&type=type_A', put)
         AJAX_send('http://127.0.0.1:5000/races/races_info?begin_id=1&end_id=10&type=type_B', put)
         AJAX_send('http://127.0.0.1:5000/races/races_info?begin_id=1&end_id=10&type=type_N', put)
     }
-    begin()
+    $(begin())
     </script>
+
 {% endblock %}
 
 {% block content %}
 
 <!-- 轮播图 start -->
-<div class="focus ">
-    <!-- 左侧按钮 -->
-    <a href="javascript:;" class="arrow-l">&lt;</a>
-    <!-- 右侧按钮 -->
-    <a href="javascript:;" class="arrow-r"> &gt; </a>
-    <!-- 核心的滚动区域 -->
-    <ul>
-        <li>
-            <a href="#">
-                {{ img('focus0.jpg') }}
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                {{ img('focus1.jpg') }}
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                {{ img('focus2.jpg') }}
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                {{ img('focus3.jpg') }}
-            </a>
-        </li>
-    </ul>
-    <!-- 小圆圈 -->
-    <ol class="circle">
-    </ol>
-</div>
+{{ rotation_chart(imgs_info={
+    'focus0.jpg': '#',
+    'focus1.jpg': '#',
+    'focus2.jpg': '#',
+    'focus3.jpg': '#'
+}) }}
 <!-- 轮播图 end -->
 
 <!-- 竞赛 start -->
@@ -66,7 +42,6 @@
     <div class="tab">
         <div class="tab_list">
             <ul>
-                <li>热门竞赛</li>
                 <li class="current">A类竞赛</li>
                 <li>B类竞赛</li>
                 <li>非A、B类竞赛</li>
@@ -74,20 +49,6 @@
             </ul>
         </div>
         <div class="tab_con">
-            <div class="item1">
-                <div class="dropdown-content" name="type_T">
-                    <a href="#"><span>热门竞赛top1~10</span><span>比赛时间2023.6.6</span><span >点击了解更多详情</span></a>
-                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
-                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
-                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
-                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
-                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
-                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
-                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
-                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
-                    <a href="#"><span>全国大学生数学竞赛r</span><span>比赛时间2023.6.6</span><span>点击了解更多详情</span></a>
-                </div>
-            </div>
             <div class="item1" style="display: block;">
                 <div class="dropdown-content" id="type_A">
                 </div>
