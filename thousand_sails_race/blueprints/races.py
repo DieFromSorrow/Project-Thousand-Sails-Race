@@ -13,7 +13,7 @@ def races():
 
 @bp.route('races_info')
 def races_info():
-    race_type = begin_id = end_id = None
+    race_type = begin_id = end_id = all_num = None
     try:
         begin_id = int(request.args.get('begin_id'))
         end_id = int(request.args.get('end_id'))

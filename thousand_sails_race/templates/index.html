@@ -46,29 +46,12 @@
         </div>
         <div>
             <!-- 轮播图 start -->
-            <div class="focus ">
-                <!-- 左侧按钮 -->
-                <a href="javascript:;" class="arrow-l">&lt;</a>
-                <!-- 右侧按钮 -->
-                <a href="javascript:;" class="arrow-r"> &gt; </a>
-                <!-- 核心的滚动区域 -->
-                <ul>
-                    <li>
-                        <a href="#">{{ img('focus0.jpg') }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ img('focus1.jpg') }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ img('focus2.jpg') }}</a>
-                    </li>
-                    <li>
-                        <a href="#">{{ img('focus3.jpg') }}</a>
-                    </li>
-                </ul>
-                <!-- 小圆圈 -->
-                <ol class="circle"></ol>
-            </div>
+            {{ rotation_chart(imgs_info={
+                'focus0.jpg': '#',
+                'focus1.jpg': '#',
+                'focus2.jpg': '#',
+                'focus3.jpg': '#'
+            }) }}
             <!-- 轮播图 end -->
         </div>
         <div class="cource">

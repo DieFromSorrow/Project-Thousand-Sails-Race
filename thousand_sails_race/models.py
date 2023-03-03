@@ -36,25 +36,26 @@ class TeacherModel(db.Model):
     awards = db.Column(db.Text, nullable=False)
 
 
-'''# 邮箱验证码表
-class EmailCaptchaModel(db.Model):
-    __tablename__ = "email_captcha"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    email = db.Column(db.String(100), nullable=False)
-    captcha = db.Column(db.String(100), nullable=False)'''
-
-
 # 赛事表--id,竞赛名称、主办方、开始时间、结束时间、竞赛详情
 class RaceinfoModel(db.Model):
     __tablename__ = "raceinfo"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(200), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
     sponsor = db.Column(db.String(100), nullable=False)
-    type = db.Column(db.String(100), nullable=False)
+    type = db.Column(db.String(50), nullable=False)
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
     details = db.Column(db.Text, nullable=False)
-    href = db.Column(db.String(50), nullable=False)
+    href = db.Column(db.String(200), nullable=False)
+
+
+class LibsinfoModel(db.Model):
+    __tablename__ = "libsinfo"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100), nullable=False)
+    type = db.Column(db.String(50), nullable=False)
+    time = db.Column(db.DateTime)
+    href = db.Column(db.String(200), nullable=False)
 
 
 # 新闻公告表--id,新闻主题、新闻内容、发布时间
