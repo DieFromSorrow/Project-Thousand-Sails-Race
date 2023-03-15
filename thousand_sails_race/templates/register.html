@@ -20,11 +20,11 @@
             {% if form.username.errors|length > 0 %}
                 <small class="error">{{ form.username.errors[0] }}</small><br>
             {% endif %}
-            {{ form.password(placeholder='请输入密码') }}
+            {{ form.password(type='password', placeholder='请输入密码') }}
             {% if form.password.errors|length > 0 %}
                 <small class="error">{{ form.password.errors[0] }}</small><br>
             {% endif %}
-            {{ form.password_confirm(placeholder='请确认密码') }}
+            {{ form.password_confirm(type='password', placeholder='请确认密码') }}
             {% if form.password_confirm.errors|length > 0 %}
                 <small class="error">{{ form.password_confirm.errors[0] }}</small><br>
             {% endif %}
