@@ -15,6 +15,7 @@ pymysql = "*"
 wtforms = "*"
 sendgrid = "*"
 bokeh = "*"
+cryptography = "*"
 
 [dev-packages]
 faker = "*"
