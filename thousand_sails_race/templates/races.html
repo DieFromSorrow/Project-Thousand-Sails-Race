@@ -17,9 +17,9 @@
 
     <script type="text/javascript">
     function begin () {
-        AJAX_send('http://127.0.0.1:5000/races/races_info?begin_id=1&end_id=10&type=type_A', put)
-        AJAX_send('http://127.0.0.1:5000/races/races_info?begin_id=1&end_id=10&type=type_B', put)
-        AJAX_send('http://127.0.0.1:5000/races/races_info?begin_id=1&end_id=10&type=type_N', put)
+        AJAX_send('{{ url_for('races.races_info', begin_id=1, end_id=10, type='type_A')|safe }}', put)
+        AJAX_send('{{ url_for('races.races_info', begin_id=1, end_id=10, type='type_B')|safe }}', put)
+        AJAX_send('{{ url_for('races.races_info', begin_id=1, end_id=10, type='type_N')|safe }}', put)
     }
     $(begin())
     </script>

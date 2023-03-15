@@ -24,7 +24,7 @@ function put(data) {
     let info = data['libs_info']
     for (let i = 0; i < info.length; i++) {
         let item = info[i]
-        races += '<div class="jingsaibox"><a href=' + item['href'] + '><div class="jchild1">'
+        races += '<div class="jingsaibox"><a href=' + item['href'] + ' target="_blank"><div class="jchild1">'
             + item['name'] + '</div><div class="jchild2">' + item['time'].substring(6, 17)
             + '</div><div class="jchild3">点击下载</div></a></div>'
     }
@@ -33,7 +33,6 @@ function put(data) {
         return "\'" + "libs_info?begin_id="
             + begin_id + "&end_id=" + end_id + "&type=" + type + "\'"
     }
-
 
     let idx_url
     let next_url

@@ -36,7 +36,12 @@
             <a class="gotoItm " href="{{ url_for('races.races') }}">竞赛信息</a>
             <a class="gotoItm " href="{{ url_for('library.library') }}">资源库</a>
             <a class="gotoItm " href="{{ url_for('sharing.sharing') }}">经验分享</a>
-            <a class="gotoItm " href="{{ url_for('index.index') }}">私人定制</a>
+            <div class="dropdown1 gotoItm">
+                <button class="dropbtn1">私人定制</button>
+                <div class="dropdown-content1">
+                    <a href="#">{{ img('gongzhonghao1.jpg') }}</a>
+                </div>
+            </div>
             {% if 'login' not in session %}
             <a class="gotoItm " href="{{ url_for('auth.login') }}">登录</a>
             {% else %}

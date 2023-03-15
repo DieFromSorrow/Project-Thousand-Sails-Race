@@ -24,7 +24,6 @@ function put(data) {
             + begin_id + "&end_id=" + end_id + "&type=" + type + "\'"
     }
 
-
     let idx_url
     let next_url
     let opnn = 10
@@ -47,6 +46,6 @@ function put(data) {
         next_url = the_url(begin_id + opnn, end_id + opnn, type)
         page_nums += '<a rel="next" onclick="AJAX_send(url=' + next_url + ', func=put)">></a>\n'
     }
-    console.log(page_nums)
+    
     document.getElementById(type).innerHTML = races + page_nums
 }

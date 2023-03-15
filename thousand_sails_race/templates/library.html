@@ -17,9 +17,9 @@
 
     <script type="text/javascript">
     function begin () {
-        AJAX_send('http://127.0.0.1:5000/library/libs_info?begin_id=1&end_id=10&type=PPT', put)
-        AJAX_send('http://127.0.0.1:5000/library/libs_info?begin_id=1&end_id=10&type=PPP', put)
-        AJAX_send('http://127.0.0.1:5000/library/libs_info?begin_id=1&end_id=10&type=CQB', put)
+        AJAX_send('{{ url_for('library.libs_info', begin_id=1, end_id=10, type='PPT')|safe }}', put)
+        AJAX_send('{{ url_for('library.libs_info', begin_id=1, end_id=10, type='PPP')|safe }}', put)
+        AJAX_send('{{ url_for('library.libs_info', begin_id=1, end_id=10, type='CQB')|safe }}', put)
     }
     $(begin())
     </script>
@@ -42,10 +42,9 @@
     <div class="tab">
         <div class="tab_list">
             <ul>
-                <li>精选PPT模板</li>
-                <li class="current">项目计划书模板</li>
+                <li class="current">精选PPT模板</li>
+                <li>项目计划书模板</li>
                 <li>竞赛题库</li>
-
             </ul>
         </div>
         <div class="tab_con">

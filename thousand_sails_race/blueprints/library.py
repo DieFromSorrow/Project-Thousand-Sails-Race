@@ -1,5 +1,5 @@
 
-from flask import Blueprint, render_template, request, flash, redirect, jsonify
+from flask import Blueprint, render_template, request, flash, redirect, jsonify, session, url_for
 from thousand_sails_race.models import LibsinfoModel
 
 bp = Blueprint('library', __name__, url_prefix='/library')
@@ -11,7 +11,7 @@ def library():
 
 
 @bp.route('libs_info')
-def races_info():
+def libs_info():
     lib_type = begin_id = end_id = all_num = None
     try:
         begin_id = int(request.args.get('begin_id'))
@@ -35,3 +35,13 @@ def races_info():
         return jsonify({'type': lib_type, 'libs_info': _libs_info,
                         'begin_id': begin_id, 'end_id': end_id,
                         'all_num': all_num})
+
+
+@bp.route('download/<filename>')
+def download(filename):
+    if 'login' not in session:
+        flash('请先登录')
+        return redirect(url_for(endpoint='auth.login'))
+
+    return redirect(url_for('static', filename='files/' + filename))
+
