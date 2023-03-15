@@ -14,10 +14,11 @@
 {% block content %}
 
 <!-- 搜索开始 -->
+   <form method="GET" action="{{ url_for('news.search') }}">
 <div class="ser_box">
     <div class="navbar-item">
         <div class="field is-grouped">
-            <form method="GET" action="{{ url_for('news.search') }}">
+
             <div class="control has-icons-right">
                 <input type="search" class="input" style="width: 20rem;" placeholder="搜索你感兴趣的内容..." name="q">
                 <span class="icon is-right"><i class="fa fa-search"></i></span>
@@ -25,10 +26,11 @@
             <div class="control">
                 <button type="submit" class="button is-info">搜索</button>
             </div>
-            </form>
+
         </div>
     </div>
 </div>
+    </form>
 <!-- 搜索结束 -->
 
 <div class="block" style="z-index: 100;">

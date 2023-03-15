@@ -49,6 +49,19 @@ class RaceinfoModel(db.Model):
     href = db.Column(db.String(200), nullable=False)
 
 
+# 热门赛事
+class HotraceinfoModel(db.Model):
+    __tablename__ = "hotraceinfo"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100), nullable=False)
+    sponsor = db.Column(db.String(100), nullable=False)
+    type = db.Column(db.String(50), nullable=False)
+    start_time = db.Column(db.DateTime)
+    end_time = db.Column(db.DateTime)
+    details = db.Column(db.Text, nullable=False)
+    href = db.Column(db.String(200), nullable=False)
+
+
 class LibsinfoModel(db.Model):
     __tablename__ = "libsinfo"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -73,7 +86,7 @@ class NewsinfoModel(db.Model):
 
 # 经验贴--id,经验类型、发布时间
 class ExperienceModel(db.Model):
-    __tablename__="experinfo"
+    __tablename__ = "experinfo"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     type = db.Column(db.String(200), nullable=False)
     expe_time = db.Column(db.DateTime)
@@ -81,6 +94,11 @@ class ExperienceModel(db.Model):
     # 外键--发表人
     stdu_id = db.Column(db.Integer, db.ForeignKey("stduinfo.id"))
     teach_id = db.Column(db.Integer, db.ForeignKey("teachinfo.id"))
+
+    hotrace_id = db.Column(db.Integer, db.ForeignKey("hotraceinfo.id"))
+    allrace_id = db.Column(db.Integer, db.ForeignKey("raceinfo.id"))
+    race_hot = db.relationship(HotraceinfoModel, backref="hotraces")
+    race_all = db.relationship(RaceinfoModel, backref="allraces")
 
 
 # 发表问题--id,题目、内容、发表时间
