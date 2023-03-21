@@ -91,8 +91,8 @@
         <!-- 核心的滚动区域 -->
         <ul>
             {% for img_fn, url in imgs_info.items() %}
-                <li><a href="{{ url }}">
-                    {{ img(img_fn) }}
+                <li><a href="{{ url }}" target="_blank">
+                    {{ img('r_c/' + img_fn) }}
                 </a></li>
             {% endfor %}
         </ul>

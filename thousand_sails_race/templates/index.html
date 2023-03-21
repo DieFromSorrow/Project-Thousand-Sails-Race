@@ -20,39 +20,14 @@
                 </li>
             </ul>
             {% endfor %}
-{#            <ul>#}
-{#                <li>#}
-{#                    <a href="#">前端开发<span>&gt</span></a>#}
-{#                </li>#}
-{#            </ul>#}
-{#            <ul>#}
-{#                <li>#}
-{#                    <a href="#">前端开发<span>&gt</span></a>#}
-{#                </li>#}
-{#            </ul>#}
-{#            <ul>#}
-{#                <li>#}
-{#                    <a href="#">前端开发<span>&gt</span></a>#}
-{#                </li>#}
-{#            </ul>#}
-{#            <ul>#}
-{#                <li>#}
-{#                    <a href="#">前端开发<span>&gt</span></a>#}
-{#                </li>#}
-{#            </ul>#}
-{#            <ul>#}
-{#                <li>#}
-{#                    <a href="#">前端开发<span>&gt</span></a>#}
-{#                </li>#}
-{#            </ul>#}
         </div>
         <div>
             <!-- 轮播图 start -->
             {{ rotation_chart(imgs_info={
-                'focus0.jpg': '#',
-                'focus1.jpg': '#',
-                'focus2.jpg': '#',
-                'focus3.jpg': '#'
+                '1.1.png': 'https://cy.ncss.cn/',
+                '1.2.png': 'http://www.ncda.org.cn/',
+                '1.3.png': 'https://dandad.cn/',
+                '1.4.png': 'http://univ.ciciec.com/'
             }) }}
             <!-- 轮播图 end -->
         </div>
@@ -100,7 +75,6 @@
                 <a href="#">jQuery</a>
             </li>
         </ul>
-        <a href="#" class="mod">修改兴趣</a>
     </div>
     <!-- 精品推荐结束 -->
 
@@ -117,7 +91,7 @@
                 {% for selected in selected_race %}
                 <li class="rm">
                     <a href="#">
-                        {{ img('666.png') }}
+                        {{ img('hot/2.' + [loop.index]|join + '.png') }}
                         <h3>{{ selected.name }}</h3>
                         <p><span>精选</span>{{ selected.type }}</p>
                     </a>
