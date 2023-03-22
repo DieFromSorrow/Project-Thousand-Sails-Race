@@ -9,6 +9,8 @@ from thousand_sails_race.blueprints.index import bp as index_bp
 from thousand_sails_race.blueprints.races import bp as races_bp
 from thousand_sails_race.blueprints.sharing import bp as sharing_bp
 from thousand_sails_race.blueprints.library import bp as library_bp
+from thousand_sails_race.blueprints.admin import bp as admin_bp
+from thousand_sails_race.blueprints.forum import bp as forum_bp
 
 from flask_migrate import Migrate
 
@@ -38,5 +40,7 @@ app.register_blueprint(index_bp)
 app.register_blueprint(races_bp)
 app.register_blueprint(sharing_bp)
 app.register_blueprint(library_bp)
+app.register_blueprint(admin_bp)
+app.register_blueprint(forum_bp)
 
 register_commands()

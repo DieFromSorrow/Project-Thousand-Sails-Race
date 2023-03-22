@@ -14,6 +14,7 @@
     /* width: 1200px; */
     height: 421px;
     overflow: hidden;
+    /* margin-top: -9px; */
 }
 
 .focus ul {
@@ -125,7 +126,9 @@
 
 .banner {
     height: 421px;
-    background-color: #00a4ff;
+    /* background-color: #00a4ff; */
+    background: url(../images/R-C.jpg) no-repeat;
+    background-size: 1200px 421px;
 }
 
 .subnav {
@@ -164,7 +167,7 @@
 
 .cource h2 {
     height: 48px;
-    background-color: greenyellow;
+    background-color: #008cff61;
     text-align: center;
     /* 水平居中 */
     line-height: 48px;
@@ -300,4 +303,9 @@
 
 .box .content li span {
     color: #ff7c2d;
+}
+
+.box .content li img {
+    height: 155px;
+    width: 227px;
 }
