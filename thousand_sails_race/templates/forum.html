@@ -1,0 +1,61 @@
+
+{% extends 'base.html' %}
+
+{% block title %}资源库{% endblock %}
+
+{% block styles %}
+    {{ static_file('css', 'https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css', local=False) }}
+    {{ static_file('css', 'forum.css') }}
+{% endblock %}
+
+{% block content %}
+    <div class="wendabox">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto" style="margin: 0 auto;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="wendaPublicQuestion.html">提问|写文章</a>
+                        </li>
+                        <li class="nav-item ml-2">
+                            <form class="form-inline my-2 my-lg-0" method="GET" action="#">
+                                <input class="form-control mr-sm-2" type="search" placeholder="请输入关键字" aria-label="Search" name="q">
+                                <button class="btn btn-outline-success my-2 my-sm-0 btn1" type="submit">搜索</button>
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row" style="margin-top: 20px;">
+                <div class="col"></div>
+                <div class="col-10">
+                    <ul class="question-ul">
+                        <li>
+                            <div class="side-question">
+                                <img class="side-question-avatar" src="images/1.jpg" alt="">
+                            </div>
+                            <div class="question-main">
+                                <div class="question-title"><a href="wendaDetail.html">如何提高数学成绩</a></div>
+                                <div class="question-content">1. 养成良好的学习习惯 想要提高成绩...</div>
+                                <div class="question-detail">
+                                    <span class="question-author">李华</span>
+                                    <span class="question-time">2022.2.2</span>
+                                </div>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
