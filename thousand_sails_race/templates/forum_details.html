@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}
+
+{% block title %}论坛内容{% endblock %}
+
+{% block styles %}
+    {{ static_file('css', 'https://cdn.bootcss.com/bootstrap/4.6.0/css/bootstrap.min.css', local=false) }}
+    {{ static_file('css', 'forum_details.css') }}
+{% endblock %}
+
+
+    <div class="container">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col"></div>
+            <div class="col-10" style="background-color: #fff;padding: 20px;">
+                <h3 class="page-title">如何提高数学成绩</h3>
+                <p class="question-info">
+                    <span>作者:李华&nbsp;&nbsp;&nbsp;</span>
+                    <span>时间:2022.2.2</span>
+                </p>
+                <hr>
+                <p class="question-content">1. 养成良好的学习习惯 想要提高成绩，高中生一定要养成良好的学习习惯。 比如预习、复习、反思错题等。 高中数学跟初中数学的难度不在一个等级，在上课之前，高中生一定要做好预习工作，提前了解新课内容，这样听课的效率会高很多。 ... 2. 打牢基础，稳固根基 基础是根基，基础不牢、地动山摇。 想要数学成绩好，高中生要先打牢基础。 在学习的时候，把数学教材上的公式记准记牢，用的时候直接拿来。 ... 3. 提高自主学习能力 数学是一门推理判断能力很强的科目。 高中生想要学好数学，一定要学会独立思考，提高思考能力跟自主学习能力。
+                    当遇到难题的时候，要先自己思考，思考解题步骤，思考自己思路受阻的地方。 ... 4. 哪里不会练哪里 数学成绩差的学生必然有很多不懂得知识点，有很多不会做的题型。 在学习数学的时候，同学们要谨记：哪里不会练哪里。
+                </p>
+                <hr>
+                <h4 class="comment-group-title">评论：</h4>
+                <form action="{{ url_for('da.public_answer') }}" method="post">
+                    <div class="form-group">
+                        <input type="text" placeholder="请填写评论" name="content" class="form-control">
+                        <input type="hidden" name="question_id" value="{{ question.id }}">
+                    </div>
+                    <div class="form-group" style="text-align: right;">
+                        <button class="btn btn-primary">评论</button>
+                    </div>
+                </form>
+                <ul class="comment-group">
+
+                    <li>
+                        <div class="user-info">
+                            <img class="avatar" src="images/1.jpg" alt="">
+                            <span class="username">李华</span>
+                            <span class="create-time">2022.2.2</span>
+                        </div>
+                        <p class="comment-content">嗯嗯，你说的对</p>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
