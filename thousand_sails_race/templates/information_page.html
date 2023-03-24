@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}比赛网页{% endblock %}
+
+{% block styles %}
+    {{ static_file('css', 'sharing_page.css') }}
+{% endblock %}
+
+{% block content %}
+    <div class="box" style="margin-top: 80px">
+    {{ race_expe.type }}
+    </div>
+{% endblock %}

@@ -4,7 +4,7 @@
 {% block title %}资源库{% endblock %}
 
 {% block styles %}
-    {{ static_file('css', 'https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css', local=False) }}
+    {{ static_file('css', 'bootstrap.4.6.min.css') }}
     {{ static_file('css', 'forum.css') }}
 {% endblock %}
 
@@ -20,6 +20,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="wendaPublicQuestion.html">提问|写文章</a>
                         </li>
+
                         <li class="nav-item ml-2">
                             <form class="form-inline my-2 my-lg-0" method="GET" action="#">
                                 <input class="form-control mr-sm-2" type="search" placeholder="请输入关键字" aria-label="Search" name="q">
@@ -37,19 +38,25 @@
                 <div class="col"></div>
                 <div class="col-10">
                     <ul class="question-ul">
-                        <li>
+
+                            {% for question in questions %}
+                                <li>
                             <div class="side-question">
-                                <img class="side-question-avatar" src="images/1.jpg" alt="">
+                                <img class="side-question-avatar" src="/static/images/touxiang.jpg" alt="">
+{#                                {{ img('tuoxiang.jpg') }}#}
                             </div>
+
                             <div class="question-main">
-                                <div class="question-title"><a href="wendaDetail.html">如何提高数学成绩</a></div>
-                                <div class="question-content">1. 养成良好的学习习惯 想要提高成绩...</div>
+                                <div class="question-title"><a href="wendaDetail.html">{{question.title}}</a></div>
+                                <div class="question-content">{{ question.content }}</div>
                                 <div class="question-detail">
-                                    <span class="question-author">李华</span>
-                                    <span class="question-time">2022.2.2</span>
+                                    <span class="question-author">作者：{{ question.author.username }}</span>
+                                    <span class="question-time">创建时间：{{ question.create_time }}</span>
                                 </div>
                             </div>
-                        </li>
+                                </li>
+                            {% endfor %}
+
 
 
                     </ul>

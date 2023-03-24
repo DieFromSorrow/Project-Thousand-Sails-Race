@@ -97,6 +97,7 @@ class ExperienceModel(db.Model):
 
     hotrace_id = db.Column(db.Integer, db.ForeignKey("hotraceinfo.id"))
     allrace_id = db.Column(db.Integer, db.ForeignKey("raceinfo.id"))
+
     race_hot = db.relationship(HotraceinfoModel, backref="hotraces")
     race_all = db.relationship(RaceinfoModel, backref="allraces")
 
