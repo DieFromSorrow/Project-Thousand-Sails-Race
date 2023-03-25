@@ -1,0 +1,31 @@
+{% from 'macros.html' import static_file %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>接口界面</title>
+	{{ static_file('css', 'admin_dashborad.css') }}
+</head>
+<body>
+	<div class="container">
+		<div class="box" id="box1">
+			<a href="{{ url_for('admin.users_administration') }}">用户信息管理</a>
+		</div>
+		<div class="box" id="box2">
+			<a href="page2.html">竞赛信息管理</a>
+		</div>
+		<div class="box" id="box3">
+			<a href="page3.html">热门竞赛管理</a>
+		</div>
+		<div class="box" id="box4">
+			<a href="page4.html">新闻公告管理</a>
+		</div>
+		<div class="box" id="box5">
+			<a href="page5.html">资源内容管理</a>
+		</div>
+		<div class="box" id="box6">
+			<a href="page6.html">论坛内容管理</a>
+		</div>
+	</div>
+</body>
+</html>

@@ -16,7 +16,7 @@ def initdb(drop):
 
 
 @app.cli.command()
-@click.option('--user', default=10, help='Quantity of users, default is 10.')
+@click.option('--user', default=100, help='Quantity of users, default is 100.')
 @click.option('--race', default=160, help='Quantity of races, default is 160.')
 @click.option('--news', default=60, help='Quantity of news, default is 60.')
 @click.option('--lib', default=100, help='Quantity of races, default is 100.')

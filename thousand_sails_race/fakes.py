@@ -23,7 +23,7 @@ def fake_admin():
     db.session.commit()
 
 
-def fake_user(count=10):
+def fake_user(count=100):
     for i in range(count):
         user = UserModel(
             username=fake.user_name(),
