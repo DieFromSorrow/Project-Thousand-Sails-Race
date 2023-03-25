@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session, g
 
 from thousand_sails_race import settings
 from thousand_sails_race.extends import db, mail
@@ -13,6 +13,8 @@ from thousand_sails_race.blueprints.admin import bp as admin_bp
 from thousand_sails_race.blueprints.forum import bp as forum_bp
 
 from flask_migrate import Migrate
+
+from thousand_sails_race.models import UserModel
 
 
 def register_commands():
@@ -44,3 +46,19 @@ app.register_blueprint(admin_bp)
 app.register_blueprint(forum_bp)
 
 register_commands()
+
+
+@app.before_request
+def my_before_request():
+    user_id = session.get("user_id")
+    if user_id:
+        user_who = UserModel.query.get(user_id)
+        setattr(g, "user_who", user_who)
+    else:
+        setattr(g, "user_who", None)
+
+
+# 上下文处理器：定义为全局变量
+@app.context_processor
+def my_context_process():
+    return {"user_who": g.user_who}

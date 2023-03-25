@@ -13,13 +13,15 @@
     <div class="banner w">
 
         <div class="subnav">
+        <ul>
             {% for race in hot_race %}
-            <ul>
+
                 <li>
-                    <a href="{{ url_for('index.index')}}">{{ race.name }} <span>&gt</span></a>
+                    <a href="{{ url_for('index.hotrace',racename_id=race.id)}}">{{ race.name }} </a>
                 </li>
-            </ul>
+
             {% endfor %}
+        </ul>
         </div>
         <div>
             <!-- 轮播图 start -->
@@ -37,8 +39,11 @@
                 {% for exper in experience %}
                 <ul>
                     <li>
-                        <h4>{{exper.type}}</h4>
-                        <p>{{ exper.expe_time }}</p>
+
+                        <a href="{{ url_for('sharing.experice',exper_id=exper.id) }}">
+                            <h4>{{exper.type}}</h4>
+                            <p>{{ exper.expe_time }}</p>
+                        </a>
                     </li>
                 </ul>
                 {% endfor %}
@@ -54,26 +59,15 @@
         <h3>精品推荐</h3>
         <ul>
             <li>
-                <a href="#">jQuery</a>
+                <a href="{{ url_for('library.library') }}">精选PPT模板</a>
             </li>
             <li>
-                <a href="#">jQuery</a>
+                <a href="{{ url_for('library.library') }}">项目计划书模板</a>
             </li>
             <li>
-                <a href="#">jQuery</a>
+                <a href="{{ url_for('library.library') }}">竞赛题库</a>
             </li>
-            <li>
-                <a href="#">jQuery</a>
-            </li>
-            <li>
-                <a href="#">jQuery</a>
-            </li>
-            <li>
-                <a href="#">jQuery</a>
-            </li>
-            <li>
-                <a href="#">jQuery</a>
-            </li>
+
         </ul>
     </div>
     <!-- 精品推荐结束 -->
@@ -83,17 +77,19 @@
     <div class="box wrapper w">
         <div class="title">
             <h2>热门推荐</h2>
-            <a href="#">查看全部</a>
+            <a href="{{ url_for('races.races') }}">查看全部</a>
         </div>
 
         <div class="content clearfix">
             <ul>
                 {% for selected in selected_race %}
                 <li class="rm">
-                    <a href="#">
+                    <a href="{{ url_for('index.races_10',racename_id=selected.id)}}">
+
                         {{ img('hot/2.' + [loop.index]|join + '.png') }}
                         <h3>{{ selected.name }}</h3>
                         <p><span>精选</span>{{ selected.type }}</p>
+
                     </a>
                 </li>
                 {% endfor %}

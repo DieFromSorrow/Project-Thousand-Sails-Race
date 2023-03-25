@@ -13,8 +13,11 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        email = form.email.data
+        user = UserModel.query.filter_by(email=email).first()
         flash("welcome on")
         session['login'] = True
+        session['user_id'] = user.id
         return redirect('/')
     return render_template('login.html', form=form)
 
@@ -23,6 +26,7 @@ def login():
 def logout():
     if 'login' in session:
         session.pop('login')
+        session.pop('user_id')
         flash('成功登出')
     return redirect('/')
 
