@@ -14,11 +14,12 @@
 <!-- 文章 开始 -->
 
 <!-- 搜索框 start -->
+    <form method="GET" action="{{ url_for('sharing.search_sharing') }}">
 <div class="ser_box">
     <div class="navbar-item">
         <div class="field is-grouped">
             <div class="control has-icons-right">
-                <input type="text" class="input" style="width: 20rem;" placeholder="搜索你感兴趣的内容...">
+                <input type="text" class="input" style="width: 20rem;" placeholder="搜索你感兴趣的内容..." name="q">
                 <span class="icon is-right"><i class="fa fa-search"></i></span>
             </div>
             <div class="control">
@@ -27,6 +28,7 @@
         </div>
     </div>
 </div>
+    </form>
 
 <!-- 搜索框 end -->
 <div class="section">
@@ -34,11 +36,12 @@
         <div class="tile">
             <div class="tile is-vertical is-parent is-8">
                 <div class="box">
+                    {% for shares in share %}
                     <div class="media">
                         <div class="media-content">
                             <div class="content">
-                                <p><strong><a href="#">大学生数学竞赛的经验分享</a></strong></p>
-                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
+                                <p><strong><a href="#">{{ shares.title }}</a></strong></p>
+                                <p><strong>作者（{{ shares.stdu_id }}）：</strong>{{ shares.content }}</p>
                                 <p>
                                     <a class="tag is-medium is-lightblue has-addons">
                                         <i class="fa fa-thumbs-up"></i>
@@ -52,96 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="media">
-                        <div class="media-content">
-                            <div class="content">
-                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
-                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
-                                <p>
-                                    <a class="tag is-medium is-lightblue has-addons">
-                                        <i class="fa fa-thumbs-up"></i>
-                                        <span class="icon is-medium">763</span>
-                                    </a>
-                                    <a class="tag is-medium is-lightblue">
-                                        <i class="fa fa fa-thumbs-down"></i>
-                                        <span class="icon is-medium">22</span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="media-content">
-                            <div class="content">
-                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
-                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
-                                <p>
-                                    <a class="tag is-medium is-lightblue has-addons">
-                                        <i class="fa fa-thumbs-up"></i>
-                                        <span class="icon is-medium">763</span>
-                                    </a>
-                                    <a class="tag is-medium is-lightblue">
-                                        <i class="fa fa fa-thumbs-down"></i>
-                                        <span class="icon is-medium">22</span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="media-content">
-                            <div class="content">
-                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
-                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
-                                <p>
-                                    <a class="tag is-medium is-lightblue has-addons">
-                                        <i class="fa fa-thumbs-up"></i>
-                                        <span class="icon is-medium">763</span>
-                                    </a>
-                                    <a class="tag is-medium is-lightblue">
-                                        <i class="fa fa fa-thumbs-down"></i>
-                                        <span class="icon is-medium">22</span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="media-content">
-                            <div class="content">
-                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
-                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
-                                <p>
-                                    <a class="tag is-medium is-lightblue has-addons">
-                                        <i class="fa fa-thumbs-up"></i>
-                                        <span class="icon is-medium">763</span>
-                                    </a>
-                                    <a class="tag is-medium is-lightblue">
-                                        <i class="fa fa fa-thumbs-down"></i>
-                                        <span class="icon is-medium">22</span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="media-content">
-                            <div class="content">
-                                <p><strong><a>大学生数学竞赛的经验分享</a></strong></p>
-                                <p><strong>作者（老王）：</strong>没有啥复杂的东西，考虑清楚需求，就可以很自然的衍生出这些解决方案...</p>
-                                <p>
-                                    <a class="tag is-medium is-lightblue has-addons">
-                                        <i class="fa fa-thumbs-up"></i>
-                                        <span class="icon is-medium">763</span>
-                                    </a>
-                                    <a class="tag is-medium is-lightblue">
-                                        <i class="fa fa fa-thumbs-down"></i>
-                                        <span class="icon is-medium">22</span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="tile is-vertical is-parent">

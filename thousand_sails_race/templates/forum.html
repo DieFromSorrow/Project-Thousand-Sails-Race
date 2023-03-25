@@ -4,7 +4,11 @@
 {% block title %}资源库{% endblock %}
 
 {% block styles %}
+<<<<<<< HEAD
     {{ static_file('css', 'bootstrap.4.6.min.css') }}
+=======
+    {{ static_file('css', 'https://cdn.bootcss.com/bootstrap/4.6.0/css/bootstrap.min.css', local=false) }}
+>>>>>>> ebd10ca7c0cd82b0014d2764946b93d923dda281
     {{ static_file('css', 'forum.css') }}
 {% endblock %}
 
@@ -18,11 +22,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto" style="margin: 0 auto;">
                         <li class="nav-item">
-                            <a class="nav-link" href="wendaPublicQuestion.html">提问|写文章</a>
+                            <a class="nav-link" href="{{ url_for("forum.publish_question") }}">提问|写文章</a>
                         </li>
 
                         <li class="nav-item ml-2">
-                            <form class="form-inline my-2 my-lg-0" method="GET" action="#">
+                            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ url_for('forum.search_question') }}">
                                 <input class="form-control mr-sm-2" type="search" placeholder="请输入关键字" aria-label="Search" name="q">
                                 <button class="btn btn-outline-success my-2 my-sm-0 btn1" type="submit">搜索</button>
                             </form>
@@ -47,7 +51,7 @@
                             </div>
 
                             <div class="question-main">
-                                <div class="question-title"><a href="wendaDetail.html">{{question.title}}</a></div>
+                                <div class="question-title"><a href="{{ url_for('forum.forum_question',ques_id=question.id )}}">{{question.title}}</a></div>
                                 <div class="question-content">{{ question.content }}</div>
                                 <div class="question-detail">
                                     <span class="question-author">作者：{{ question.author.username }}</span>

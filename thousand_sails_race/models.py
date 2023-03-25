@@ -89,6 +89,8 @@ class ExperienceModel(db.Model):
     __tablename__ = "experinfo"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     type = db.Column(db.String(200), nullable=False)
+    title=db.Column(db.String(200), nullable=False)
+    content = db.Column(db.Text, nullable=False)
     expe_time = db.Column(db.DateTime)
 
     # 外键--发表人

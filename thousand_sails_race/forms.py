@@ -53,3 +53,14 @@ class LoginForm(FlaskForm):
         if user:
             if not check_password_hash(user.password, password):
                 raise wtforms.ValidationError(message='密码错误')
+
+
+
+class AnswerForm(wtforms.Form):
+    content=wtforms.StringField(validators=[Length(min=1,message="内容格式错误")])
+    question_id=wtforms.IntegerField(validators=[InputRequired(message="必须要传入问题id")])
+
+
+class QuestionForm(wtforms.Form):
+    title=wtforms.StringField(validators=[Length(min=3,max=100,message="标题格式错误")])
+    content=wtforms.StringField(validators=[Length(min=3,message="内容格式错误")])
