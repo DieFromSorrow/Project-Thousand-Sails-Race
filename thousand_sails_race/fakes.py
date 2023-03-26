@@ -70,6 +70,37 @@ def fake_race(count=160):
     db.session.commit()
 
 
+def fake_hot_race(count=10):
+    for i in range(count):
+        hot_race = HotraceinfoModel(
+            name=fake.sentence(
+                nb_words=8,
+                variable_nb_words=True,
+                ext_word_list=None
+            ),
+            sponsor=fake.company(),
+            type=['A', 'B', 'N'][random.randint(0, 2)],
+            start_time=fake.date_time_this_year(
+                before_now=True,
+                after_now=False,
+                tzinfo=None
+            ),
+            end_time=fake.date_time_this_year(
+                before_now=False,
+                after_now=True,
+                tzinfo=None
+            ),
+            details=fake.paragraph(
+                nb_sentences=8,
+                variable_nb_sentences=True,
+                ext_word_list=None
+            ),
+            href=fake.url()
+        )
+        db.session.add(hot_race)
+    db.session.commit()
+
+
 def fake_news(count=60):
     for i in range(count):
         news = NewsinfoModel(

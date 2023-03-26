@@ -1,3 +1,4 @@
 /.idea
 /migrations
 .env
+/thousand_sails_race/static/files

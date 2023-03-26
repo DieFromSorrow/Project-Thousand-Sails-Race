@@ -1,0 +1,370 @@
+{% from 'macros.html' import static_file %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    {{ static_file('css', 'administration.css') }}
+</head>
+<body>
+<div id="content">
+    <div id="head">
+        <h1>{{ title }}</h1>
+    </div>
+    <div class="search-container">
+        <input id="search-input" type="text" placeholder="Search...">
+        <button id="search-button">Search</button>
+        {% if addable %}
+            &nbsp;
+            <button id="add-button">Add New</button>
+        {% endif %}
+    </div>
+
+    <table>
+        <thead>
+        <tr id="head-row">
+            <th>ID</th>
+            {% set changeable_columns = [] %}
+            {% set display_columns = [] %}
+            {% for table_name, table_info in table_dict.items() %}
+                {% if table_info['changeable'] %}
+                    {% set _ = changeable_columns.append(table_name) %}
+                {% endif %}
+                {% if table_info['display'] %}
+                    <th>{{ table_info['table_head'] }}</th>
+                    {% set _ = display_columns.append(table_name) %}
+                {% endif %}
+            {% endfor %}
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {% for row in data %}
+            <tr style="background-color: {{ '#333333' if loop.index is even else '#111111' }}">
+                <td>{{ row['id'] }}</td>
+                {% for dp_tn in display_columns %}
+                    {% if dp_tn in changeable_columns %}
+                        <td class="changeable">{{ row[dp_tn] }}</td>
+                    {% else %}
+                        <td>{{ row[dp_tn] }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td>
+                    <button class="modify-button" data-id="{{ row.id }}">Modify</button>
+                    <button class="delete-button" data-id="{{ row.id }}">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="modify-form">
+            {% for table_name, table_info in table_dict.items() %}
+                {% if table_info['changeable'] == True %}
+                    <label for="{{ table_name }}">{{ table_info['table_head'] }}: &nbsp;</label>
+                    {% if table_info['type'] == 'textarea' %}
+                        <br>
+                        <textarea class="form-input" id="{{ table_name }}" name="{{ table_name }}"
+                                  rows="8" cols="50"></textarea><br><br>
+                    {% else %}
+                        <input type="{{ table_info['type'] }}" class="form-input"
+                               id="{{ table_name }}" name="{{ table_name }}"><br><br>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <div id="modify-form-button">
+                <button type="submit" id="confirm-button">Confirm</button>
+                <button type="button" id="cancel-button">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+
+
+    const changeableJson =
+    {{ changeable_columns|safe }}
+    const displayJson =
+    {{ display_columns|safe }}
+    const apiName = '{{ api_name }}'
+
+
+    function deleteElem(buttonObj) {
+        let row = buttonObj.parentNode.parentNode;
+        let table = row.parentNode;
+        let nextRow = row.nextSibling;
+
+        if (row.classList.contains('highlight-even')) {
+            row.classList.remove('highlight-even');
+            row.style.backgroundColor = 'rgb(51, 51, 51)';
+        }
+
+        if (row.classList.contains('highlight-odd')) {
+            row.classList.remove('highlight-odd');
+            row.style.backgroundColor = 'rgb(17, 17, 17)';
+        }
+
+
+        let tmpBoolean = true;
+
+        if (row.style.backgroundColor === 'rgb(51, 51, 51)') {
+            tmpBoolean = false;
+        } else if (row.style.backgroundColor !== 'rgb(17, 17, 17)') {
+
+        }
+
+        while (nextRow) {
+            if (nextRow.nodeType === Node.TEXT_NODE) {
+                nextRow = nextRow.nextSibling;
+                continue;
+            }
+            if (tmpBoolean) {
+                if (nextRow.classList.contains('highlight-even')) {
+                    nextRow.classList.remove('highlight-even')
+                }
+                nextRow.style.backgroundColor = 'rgb(17, 17, 17)';
+            } else {
+                if (nextRow.classList.contains('highlight-odd')) {
+                    nextRow.classList.remove('highlight-odd')
+                }
+                nextRow.style.backgroundColor = 'rgb(51, 51, 51)';
+            }
+            tmpBoolean = !tmpBoolean;
+            nextRow = nextRow.nextSibling;
+        }
+        table.removeChild(row);
+    }
+
+
+    function deleteInfo(buttonObj) {
+        if (confirm("Are you sure you want to delete?")) {
+            const id = buttonObj.dataset.id
+            fetch(`{{ url_for('admin.delete_' + api_name, _id='') }}` + `${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to delete');
+                    } else {
+                        deleteElem(buttonObj)
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    // handle error
+                });
+        }
+    }
+
+
+    let prevPostEvent = null;
+    const modal = document.getElementById("myModal");
+    const form = document.getElementById("modify-form");
+    const formInputs = document.querySelectorAll(".form-input")
+
+
+    function modifyElem(buttonObj, formJson) {
+        let row = buttonObj.parentNode.parentNode;
+        let changeable_children = row.querySelectorAll(".changeable");
+        let i = 0;
+        const data = Object.entries(formJson);
+        changeable_children.forEach(child => {
+            child.innerHTML = formJson[displayJson[i]]
+            i += 1;
+        })
+    }
+
+
+    const confirmButton = document.getElementById("confirm-button");
+
+
+    function modifyInfo(buttonObj) {
+        const id = buttonObj.dataset.id;
+
+        fetch(`{{ url_for('admin.get_' + api_name, _id='') }}` + `${id}`)
+            .then(response => response.json())
+            .then(data => {
+                let i = 0;
+                formInputs.forEach(input => {
+                    input.value = data[changeableJson[i]];
+                    i++;
+                })
+                modal.style.display = "block";
+
+                let modifyPostEvent = event => {
+                    event.preventDefault();
+
+                    const formData = new FormData(form);
+                    const formJson = Object.fromEntries(formData.entries())
+                    const formStr = JSON.stringify(Object.fromEntries(formData.entries()));
+
+                    fetch(`{{ url_for('admin.modify_' + api_name, _id='') }}` + `${id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: formStr
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Failed to update");
+                            } else {
+                                modal.style.display = "none";
+                                modifyElem(buttonObj, formJson);
+                                console.log(buttonObj)
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            // handle error
+                        });
+                }
+
+                confirmButton.removeEventListener('click', prevPostEvent);
+                confirmButton.addEventListener('click', modifyPostEvent);
+                prevPostEvent = modifyPostEvent;
+            })
+            .catch(error => {
+                console.error(error);
+                // handle error
+            });
+    }
+
+
+    const cancelButton = document.getElementById("cancel-button");
+    const closeButton = document.querySelector('.close');
+
+
+    exitEvent = event => {
+        event.preventDefault();
+        formInputs.forEach(input => {
+            input.value = null;
+        })
+        modal.style.display = "none";
+    }
+
+
+    cancelButton.addEventListener("click", exitEvent)
+    closeButton.addEventListener("click", exitEvent)
+
+
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    const modifyButtons = document.querySelectorAll('.modify-button');
+
+
+    deleteButtons.forEach(dButton => {
+        dButton.addEventListener('click', () => deleteInfo(dButton))
+    })
+
+
+    modifyButtons.forEach(mButton => {
+        mButton.addEventListener('click', () => modifyInfo(mButton))
+    })
+
+
+    function addElem(formJson) {
+        {#const parent = document.getElementById('tbody');#}
+        {#const child = document.createElement('div');#}
+        {#parent.appendChild(child);#}
+    }
+
+
+    const addButton = document.getElementById("add-button");
+
+
+    function addInfo() {
+        modal.style.display = "block";
+        console.log("adssihf")
+        let addPostEvent = event => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const formJson = Object.fromEntries(formData.entries())
+            const formStr = JSON.stringify(Object.fromEntries(formData.entries()));
+
+            fetch(`{{ url_for('admin.add_' + api_name) }}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: formStr
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to update");
+                    } else {
+                        modal.style.display = "none";
+                        console.log("afghfjghftdsf")
+                        addElem(formJson);
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    // handle error
+                });
+        }
+        confirmButton.removeEventListener('click', prevPostEvent);
+        confirmButton.addEventListener('click', addPostEvent);
+        prevPostEvent = addPostEvent;
+    }
+
+    if (addButton) {
+        addButton.addEventListener('click', addInfo)
+    }
+
+
+    const searchInput = document.querySelector('#search-input');
+    const searchButton = document.querySelector('#search-button');
+    const tableRows = document.querySelectorAll('table tbody tr');
+    let currentIndex = -1;
+
+    searchButton.addEventListener('click', () => {
+        const searchText = searchInput.value.toLowerCase();
+
+        if (searchText === '') {
+            currentIndex = -1;
+            return;
+        }
+
+        let foundIndex = -1;
+
+        for (let _i = currentIndex + 1; _i < tableRows.length; _i++) {
+            const row = tableRows[_i];
+            const text = row.textContent.toLowerCase();
+
+            if (text.includes(searchText)) {
+                foundIndex = _i;
+                break;
+            }
+        }
+
+        if (foundIndex === -1) {
+            currentIndex = -1;
+            return;
+        }
+
+        function highlight_demo(styleName, index) {
+            tableRows[foundIndex].classList.remove(styleName);
+            setTimeout(() => {
+                tableRows[index].classList.add(styleName);
+            }, 1)
+        }
+
+        if (foundIndex % 2 === 1) highlight_demo('highlight-even', foundIndex);
+        else highlight_demo('highlight-odd', foundIndex);
+
+        tableRows[foundIndex].scrollIntoView({behavior: 'smooth', block: 'center'});
+        currentIndex = foundIndex;
+    });
+
+
+</script>
+</html>
