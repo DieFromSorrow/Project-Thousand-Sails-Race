@@ -108,6 +108,7 @@ class GenerateAdminViewFunctions:
 
         @security_verification
         def get():
+            response = None
             _id = request.args.get('_id')
             item = self.model_class.query.get(_id)
             item_dict = {}
