@@ -57,7 +57,7 @@ def publish_question():
             question = QuestionModel(title=title, content=content, author=g.user_who)
             db.session.add(question)
             db.session.commit()
-                # 跳转到这篇问答的详情页
+            # 跳转到这篇问答的详情页
             return redirect(url_for("forum.forum"))
         else:
             print(form.errors)

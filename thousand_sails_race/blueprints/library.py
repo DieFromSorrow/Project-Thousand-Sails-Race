@@ -1,6 +1,6 @@
 
 from flask import Blueprint, render_template, request, flash, redirect, jsonify, session, url_for
-from thousand_sails_race.models import LibsinfoModel
+from thousand_sails_race.models import LibsModel
 
 bp = Blueprint('library', __name__, url_prefix='/library')
 
@@ -17,14 +17,14 @@ def libs_info():
         begin_id = int(request.args.get('begin_id'))
         end_id = int(request.args.get('end_id'))
         lib_type = request.args.get('type')
-        all_num = LibsinfoModel.query.filter(LibsinfoModel.type == lib_type).count()
+        all_num = LibsModel.query.filter(LibsModel.type == lib_type).count()
         if (begin_id < 0) or (begin_id > end_id) or (lib_type not in ['PPT', 'PPP', 'CQB']):
             raise ValueError
     except ValueError:
         flash('参数有误')
         return redirect('/')
     finally:
-        _libs = LibsinfoModel.query.filter(LibsinfoModel.type == lib_type).all()[begin_id-1:end_id]
+        _libs = LibsModel.query.filter(LibsModel.type == lib_type).all()[begin_id - 1:end_id]
         _libs_info = []
         for _lib in _libs:
             _libs_info.append({

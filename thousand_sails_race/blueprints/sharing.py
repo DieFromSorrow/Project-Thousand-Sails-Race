@@ -8,7 +8,7 @@ bp = Blueprint('sharing', __name__, url_prefix='/sharing')
 
 @bp.route('/')
 def sharing():
-    share = ExperienceModel.query.order_by(ExperienceModel.expe_time.desc()).all()
+    share = ExperienceModel.query.order_by(ExperienceModel.time.desc()).all()
     return render_template('sharing.html',share=share)
 
 

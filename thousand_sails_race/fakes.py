@@ -41,7 +41,7 @@ def fake_user(count=100):
 
 def fake_race(count=160):
     for i in range(count):
-        race = RaceinfoModel(
+        race = RaceModel(
             name=fake.sentence(
                 nb_words=8,
                 variable_nb_words=True,
@@ -72,7 +72,7 @@ def fake_race(count=160):
 
 def fake_hot_race(count=10):
     for i in range(count):
-        hot_race = HotraceinfoModel(
+        hot_race = HotRaceModel(
             name=fake.sentence(
                 nb_words=8,
                 variable_nb_words=True,
@@ -103,13 +103,13 @@ def fake_hot_race(count=10):
 
 def fake_news(count=60):
     for i in range(count):
-        news = NewsinfoModel(
-            newstheme=fake.sentence(
+        news = NewsModel(
+            news_theme=fake.sentence(
                 nb_words=8,
                 variable_nb_words=True,
                 ext_word_list=None
             ),
-            newscontent=fake.paragraph(
+            news_content=fake.paragraph(
                 nb_sentences=20,
                 variable_nb_sentences=True,
                 ext_word_list=None
@@ -119,7 +119,7 @@ def fake_news(count=60):
                 after_now=False,
                 tzinfo=None
             ),
-            raceinfo_id=random.randint(1, 40)
+            race_info_id=random.randint(1, 40)
         )
         db.session.add(news)
     db.session.commit()
@@ -127,7 +127,7 @@ def fake_news(count=60):
 
 def fake_libs(count=100):
     for i in range(count):
-        lib = LibsinfoModel(
+        lib = LibsModel(
             name=fake.sentence(
                 nb_words=8,
                 variable_nb_words=True,
@@ -143,4 +143,43 @@ def fake_libs(count=100):
         )
         db.session.add(lib)
     db.session.commit()
+
+
+def fake_exp(count=80):
+    user_num = UserModel.query.count()
+    hot_race_num = HotRaceModel.query.count()
+    all_race_num = RaceModel.query.count()
+    for i in range(count):
+        exp = ExperienceModel(
+            type=fake.sentence(
+                nb_words=4,
+                variable_nb_words=True,
+                ext_word_list=None
+            ),
+            title=fake.sentence(
+                nb_words=4,
+                variable_nb_words=True,
+                ext_word_list=None
+            ),
+            content=fake.paragraph(
+                nb_sentences=20,
+                variable_nb_sentences=True,
+                ext_word_list=None
+            ),
+            expe_time=fake.date_time_this_year(
+                before_now=True,
+                after_now=False,
+                tzinfo=None
+            ),
+            author_id=random.randint(1, user_num),
+            hotrace_id=random.randint(1, hot_race_num),
+            allrace_id=random.randint(1, all_race_num)
+        )
+        db.session.add(exp)
+    db.session.commit()
+
+
+def fake_question(count=100):
+    pass
+
 

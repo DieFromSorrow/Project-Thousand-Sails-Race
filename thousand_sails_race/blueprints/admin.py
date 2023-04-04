@@ -150,7 +150,7 @@ def user_view():
 
 
 @GenerateAdminViewFunctions(
-    api_name='news', model_class=NewsinfoModel, title='News Management',
+    api_name='news', model_class=NewsModel, title='News Management',
     table_dict={
         'newstheme': {'table_head': 'Theme', 'changeable': True, 'display': True, 'type': 'text'},
         'newscontent': {'table_head': 'Content', 'changeable': True, 'display': False, 'type': 'textarea'},
@@ -161,7 +161,7 @@ def admin_news_view():
 
 
 @GenerateAdminViewFunctions(
-    api_name='race', model_class=RaceinfoModel, title='Race Management',
+    api_name='race', model_class=RaceModel, title='Race Management',
     table_dict={
         'name': {'table_head': 'Name', 'changeable': True, 'display': True, 'type': 'text'},
         'sponsor': {'table_head': 'Sponsor', 'changeable': True, 'display': True, 'type': 'text'},
@@ -176,7 +176,7 @@ def admin_race_view():
 
 
 @GenerateAdminViewFunctions(
-    api_name='lib', model_class=LibsinfoModel, title='Library Management',
+    api_name='lib', model_class=LibsModel, title='Library Management',
     table_dict={
         'name': {'table_head': 'Name', 'changeable': True, 'display': True, 'type': 'text'},
         'type': {'table_head': 'Type', 'changeable': True, 'display': True, 'type': 'text'},
@@ -188,7 +188,7 @@ def admin_lib_view():
 
 
 @GenerateAdminViewFunctions(
-    api_name='hot_race', model_class=HotraceinfoModel, title='Hot Race Management',
+    api_name='hot_race', model_class=HotRaceModel, title='Hot Race Management',
     table_dict={
         'name': {'table_head': 'Name', 'changeable': True, 'display': True, 'type': 'text'},
         'sponsor': {'table_head': 'Sponsor', 'changeable': True, 'display': True, 'type': 'text'},

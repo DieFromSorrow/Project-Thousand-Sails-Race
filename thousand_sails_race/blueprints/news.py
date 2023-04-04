@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, g, request, flash, redirect
-from thousand_sails_race.models import NewsinfoModel
+from thousand_sails_race.models import NewsModel
 from sqlalchemy.exc import ArgumentError
 
 
@@ -8,7 +8,7 @@ bp = Blueprint('news', __name__, url_prefix='/news')
 
 @bp.before_request
 def get_news_num():
-    news_num = NewsinfoModel.query.count()
+    news_num = NewsModel.query.count()
     g.news_num = news_num
 
 
@@ -24,8 +24,8 @@ def news():
         flash('参数有误')
         return redirect('/')
     finally:
-        _news = NewsinfoModel.query.filter(NewsinfoModel.id >= begin_id) \
-            .filter(NewsinfoModel.id <= end_id).all()
+        _news = NewsModel.query.filter(NewsModel.id >= begin_id) \
+            .filter(NewsModel.id <= end_id).all()
         return render_template('news.html', news=_news,
                                begin_id=begin_id, end_id=end_id,
                                all_news_num=g.get('news_num'))
@@ -48,6 +48,6 @@ def search():
         flash('参数有误')
         return redirect('/')
     finally:
-        _news = NewsinfoModel.query.filter(NewsinfoModel.newstheme.contains(q)).all()
+        _news = NewsModel.query.filter(NewsModel.news_theme.contains(q)).all()
         return render_template("news.html", news=_news,begin_id=begin_id, end_id=end_id,
                                all_news_num=g.get('news_num'))
