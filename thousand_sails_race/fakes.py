@@ -143,3 +143,4 @@ def fake_libs(count=100):
         )
         db.session.add(lib)
     db.session.commit()
+

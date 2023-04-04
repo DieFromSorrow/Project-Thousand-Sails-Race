@@ -19,12 +19,13 @@ def initdb(drop):
 @click.option('--user', default=100, help='Quantity of users, default is 100.')
 @click.option('--race', default=160, help='Quantity of races, default is 160.')
 @click.option('--news', default=60, help='Quantity of news, default is 60.')
-@click.option('--lib', default=100, help='Quantity of races, default is 100.')
-def forge(user, race, news, lib):
+@click.option('--lib', default=100, help='Quantity of library, default is 100.')
+@click.option('--hot_race', default=10, help='Quantity of hot_race, default is 10')
+def forge(user, race, news, lib, hot_race):
     """Generate fake data"""
 
     from thousand_sails_race.fakes \
-        import fake_admin, fake_user, fake_race, fake_news, fake_libs
+        import fake_admin, fake_user, fake_race, fake_news, fake_libs, fake_hot_race
 
     db.drop_all()
     click.echo('Dropped tables.')
@@ -41,7 +42,8 @@ def forge(user, race, news, lib):
     fake_news()
     click.echo('Generating %d libs info...' % lib)
     fake_libs()
+    click.echo('Generating %d hot_race info...' % hot_race)
 
-    click.echo('\ndone.')
+    click.echo('done.')
 
 

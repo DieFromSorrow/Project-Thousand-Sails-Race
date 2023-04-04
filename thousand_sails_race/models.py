@@ -17,23 +17,23 @@ class UserModel(db.Model):
 
 
 # 团队——学生信息表:id,姓名、性别、学历、获奖情况
-class StduModel(db.Model):
-    __tablename__ = "stduinfo"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    stduname = db.Column(db.String(50), nullable=False)
-    sex = db.Column(db.String(10), nullable=False)
-    education = db.Column(db.String(200), nullable=False)
-    awards = db.Column(db.Text, nullable=False)
-
-
-# 团队——指导教师信息表:id,姓名、性别、职务、获奖情况
-class TeacherModel(db.Model):
-    __tablename__ = "teachinfo"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    stduname = db.Column(db.String(50), nullable=False)
-    sex = db.Column(db.String(10), nullable=False)
-    duty = db.Column(db.String(200), nullable=False)
-    awards = db.Column(db.Text, nullable=False)
+# class StduModel(db.Model):
+#     __tablename__ = "stduinfo"
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     stduname = db.Column(db.String(50), nullable=False)
+#     sex = db.Column(db.String(10), nullable=False)
+#     education = db.Column(db.String(200), nullable=False)
+#     awards = db.Column(db.Text, nullable=False)
+#
+#
+# # 团队——指导教师信息表:id,姓名、性别、职务、获奖情况
+# class TeacherModel(db.Model):
+#     __tablename__ = "teachinfo"
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     stduname = db.Column(db.String(50), nullable=False)
+#     sex = db.Column(db.String(10), nullable=False)
+#     duty = db.Column(db.String(200), nullable=False)
+#     awards = db.Column(db.Text, nullable=False)
 
 
 # 赛事表--id,竞赛名称、主办方、开始时间、结束时间、竞赛详情
@@ -94,12 +94,11 @@ class ExperienceModel(db.Model):
     expe_time = db.Column(db.DateTime)
 
     # 外键--发表人
-    stdu_id = db.Column(db.Integer, db.ForeignKey("stduinfo.id"))
-    teach_id = db.Column(db.Integer, db.ForeignKey("teachinfo.id"))
-
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     hotrace_id = db.Column(db.Integer, db.ForeignKey("hotraceinfo.id"))
     allrace_id = db.Column(db.Integer, db.ForeignKey("raceinfo.id"))
 
+    author = db.relationship(UserModel, backref="user")
     race_hot = db.relationship(HotraceinfoModel, backref="hotraces")
     race_all = db.relationship(RaceinfoModel, backref="allraces")
 
