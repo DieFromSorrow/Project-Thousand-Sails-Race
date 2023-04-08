@@ -42,25 +42,23 @@
                 <div class="col"></div>
                 <div class="col-10">
                     <ul class="question-ul">
-
-                            {% for question in questions %}
-                                <li>
-                            <div class="side-question">
-                                <img class="side-question-avatar" src="/static/images/touxiang.jpg" alt="">
-{#                                {{ img('tuoxiang.jpg') }}#}
+                    {% for question in questions %}
+                    <li>
+                        <div class="side-question">
+                            {{ img('tuoxiang.jpg') }}
+                        </div>
+                        <div class="question-main">
+                            <div class="question-title">
+                                <a href="{{ url_for('forum.forum_question',ques_id=question.id )}}">{{question.title}}</a>
                             </div>
-
-                            <div class="question-main">
-                                <div class="question-title"><a href="{{ url_for('forum.forum_question',ques_id=question.id )}}">{{question.title}}</a></div>
-                                <div class="question-content">{{ question.content }}</div>
-                                <div class="question-detail">
-                                    <span class="question-author">作者：{{ question.author.username }}</span>
-                                    <span class="question-time">创建时间：{{ question.create_time }}</span>
-                                </div>
+                            <div class="question-content">{{ question.content }}</div>
+                            <div class="question-detail">
+                                <span class="question-author">作者：{{ question.author.username }}</span>
+                                <span class="question-time">创建时间：{{ question.create_time }}</span>
                             </div>
-                                </li>
-                            {% endfor %}
-
+                        </div>
+                    </li>
+                    {% endfor %}
                     </ul>
                 </div>
                 <div class="col"></div>

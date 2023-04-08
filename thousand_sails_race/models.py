@@ -96,8 +96,9 @@ class QuestionModel(db.Model):
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     create_time = db.Column(db.DateTime, default=datetime.now)
+    view_num = db.Column(db.Integer, nullable=False, default=0)
     # 隐式属性
-    # answers = db.relationship('AnswerModel', backpopulates='question')
+    # answers = db.relationship('AnswerModel', back_populates='question')
 
     # 外键--发表人
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))

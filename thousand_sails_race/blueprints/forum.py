@@ -12,7 +12,7 @@ bp = Blueprint('forum', __name__, url_prefix='/forum')
 @bp.route('/')
 def forum():
     questions = QuestionModel.query.order_by(QuestionModel.create_time.desc()).all()
-    return render_template('forum.html',questions=questions)
+    return render_template('forum.html', questions=questions)
 
 
 @bp.route('/forum_details/<ques_id>')
@@ -24,7 +24,7 @@ def forum_question(ques_id):
 @bp.route("/search_forum", methods=['POST', 'GET'])
 def search_question():
     q = str(request.args.get("q"))
-    forums=QuestionModel.query.filter(QuestionModel.title.contains(q)).all()
+    forums = QuestionModel.query.filter(QuestionModel.title.contains(q)).all()
     return render_template("forum.html", questions=forums)
 
 
