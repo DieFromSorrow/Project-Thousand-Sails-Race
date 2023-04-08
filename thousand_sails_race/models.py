@@ -17,6 +17,8 @@ class UserModel(db.Model):
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
+        pass
+    pass
 
 
 # 赛事表--id,竞赛名称、主办方、开始时间、结束时间、竞赛详情
@@ -32,6 +34,7 @@ class RaceModel(db.Model):
     href = db.Column(db.String(200), nullable=False)
     exp = db.relationship('ExperienceModel', back_populates='race_all')
     news = db.relationship('NewsModel', back_populates='race')
+    pass
 
 
 # 热门赛事
@@ -46,6 +49,7 @@ class HotRaceModel(db.Model):
     details = db.Column(db.Text, nullable=False)
     href = db.Column(db.String(200), nullable=False)
     exp = db.relationship('ExperienceModel', back_populates='race_hot')
+    pass
 
 
 class LibsModel(db.Model):
@@ -55,6 +59,7 @@ class LibsModel(db.Model):
     type = db.Column(db.String(50), nullable=False)
     time = db.Column(db.DateTime)
     href = db.Column(db.String(200), nullable=False)
+    pass
 
 
 # 新闻公告表--id,新闻主题、新闻内容、发布时间
@@ -68,6 +73,7 @@ class NewsModel(db.Model):
     # 外键--新闻公告对应的某个比赛
     race_info_id = db.Column(db.Integer, db.ForeignKey("raceinfo.id"))
     race = db.relationship('RaceModel', back_populates="news")
+    pass
 
 
 # 经验贴--id,经验类型、发布时间
@@ -87,6 +93,7 @@ class ExperienceModel(db.Model):
     author = db.relationship('UserModel', back_populates="exp")
     race_hot = db.relationship('HotRaceModel', back_populates="exp")
     race_all = db.relationship('RaceModel', back_populates="exp")
+    pass
 
 
 # 发表问题--id,题目、内容、发表时间
@@ -103,6 +110,7 @@ class QuestionModel(db.Model):
     # 外键--发表人
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     author = db.relationship('UserModel', back_populates="questions")
+    pass
 
 
 # 针对问题进行评论--id,内容、创建时间
@@ -119,3 +127,4 @@ class AnswerModel(db.Model):
     # 关系
     question = db.relationship(QuestionModel, backref=db.backref("answers", order_by=create_time.desc()))
     author = db.relationship('UserModel', back_populates="answers")
+    pass

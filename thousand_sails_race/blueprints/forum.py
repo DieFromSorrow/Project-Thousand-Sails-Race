@@ -1,6 +1,6 @@
 
 
-from flask import Blueprint, render_template, g, request, flash, redirect,url_for
+from flask import Blueprint, render_template, g, request, flash, redirect,url_for, session
 
 from thousand_sails_race import db
 from thousand_sails_race.forms import AnswerForm, QuestionForm
@@ -18,6 +18,9 @@ def forum():
 @bp.route('/forum_details/<ques_id>')
 def forum_question(ques_id):
     question = QuestionModel.query.get(ques_id)
+    if session.get('user_id') != question.author_id:
+        question.view_num += 1
+        pass
     return render_template("forum_details.html", question=question)
 
 
