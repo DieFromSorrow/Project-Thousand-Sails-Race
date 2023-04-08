@@ -20,7 +20,9 @@
         <div class="field is-grouped">
 
             <div class="control has-icons-right">
-                <input type="search" class="input" style="width: 20rem;" placeholder="搜索你感兴趣的内容..." name="q">
+                <label>
+                    <input type="search" class="input" style="width: 20rem;" placeholder="搜索你感兴趣的内容..." name="q">
+                </label>
                 <span class="icon is-right"><i class="fa fa-search"></i></span>
             </div>
             <div class="control">
@@ -42,9 +44,9 @@
         {% for new in news %}
         <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed" data-feed-show="true" data-dsm="post">
             <dd>
-                <h2><a href="#" target="_blank">{{ new.newstheme }}</a></h2>
+                <h2><a href="#" target="_blank">{{ new.news_theme }}</a></h2>
                 <div class="summary">
-                    {{ new.newscontent }}
+                    {{ new.news_content }}
                 </div>
                 <ul>
                     <li class="time">

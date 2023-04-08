@@ -14,6 +14,7 @@ def forum():
     questions = QuestionModel.query.order_by(QuestionModel.create_time.desc()).all()
     return render_template('forum.html',questions=questions)
 
+
 @bp.route('/forum_details/<ques_id>')
 def forum_question(ques_id):
     question = QuestionModel.query.get(ques_id)
