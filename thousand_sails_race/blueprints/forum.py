@@ -73,7 +73,6 @@ def publish_question():
 def like_qst(qst_id):
     qst = QuestionModel.query.get(qst_id)
     if qst:
-        qst.like_num += 1
         db.session.commit()
         pass
 
