@@ -20,7 +20,7 @@ class UserModel(db.Model):
     questions = db.relationship('QuestionModel', back_populates='author')
     answers = db.relationship('AnswerModel', back_populates='author')
 
-    liked_qst = db.relationship('QuestionModel', secondary=liker_qst, bake_populates='question.like_user')
+    liked_qst = db.relationship('QuestionModel', secondary=liker_qst, back_populates='like_user')
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
