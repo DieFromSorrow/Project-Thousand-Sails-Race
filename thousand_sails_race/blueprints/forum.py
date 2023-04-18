@@ -15,23 +15,24 @@ def forum():
     return render_template('forum.html', questions=questions)
 
 
-@bp.route('/forum_details/<ques_id>')
-def forum_question(ques_id):
-    question = QuestionModel.query.get(ques_id)
+@bp.route('/forum_details/<qst_id>')
+def forum_question(qst_id):
+    question = QuestionModel.query.get(qst_id)
     if session.get('user_id') != question.author_id:
         question.view_num += 1
+        db.session.commit()
         pass
     return render_template("forum_details.html", question=question)
 
 
-@bp.route("/search_forum", methods=['POST', 'GET'])
+@bp.route('/search_forum', methods=['POST', 'GET'])
 def search_question():
     q = str(request.args.get("q"))
     forums = QuestionModel.query.filter(QuestionModel.title.contains(q)).all()
-    return render_template("forum.html", questions=forums)
+    return render_template('forum.html', questions=forums)
 
 
-@bp.route("/answer/public", methods=['POST'])
+@bp.route('/answer/public', methods=['POST'])
 def public_answer():
     form = AnswerForm(request.form)
     if form.validate():
@@ -40,19 +41,19 @@ def public_answer():
         answer = AnswerModel(content=content, question_id=question_id, author_id=g.user_who.id)
         db.session.add(answer)
         db.session.commit()
-        return redirect(url_for("forum.forum_question", ques_id=question_id))
+        return redirect(url_for('forum.forum_question', ques_id=question_id))
     else:
         print(form.errors)
-        return redirect(url_for("forum.forum_question", ques_id=request.form.get("question_id")))
+        return redirect(url_for('forum.forum_question', ques_id=request.form.get("question_id")))
 
 
 # 发布问答的页面
-@bp.route("/publish", methods=["GET", "POST"])
+@bp.route('/publish', methods=['GET', 'POST'])
 def publish_question():
     if not g.user_who:
-        return redirect(url_for("auth.login"))
-    if request.method == "GET":
-        return render_template("publish.html")
+        return redirect(url_for('auth.login'))
+    if request.method == 'GET':
+        return render_template('publish.html')
     else:
         form = QuestionForm(request.form)
         if form.validate():
@@ -62,7 +63,24 @@ def publish_question():
             db.session.add(question)
             db.session.commit()
             # 跳转到这篇问答的详情页
-            return redirect(url_for("forum.forum"))
+            return redirect(url_for('forum.forum'))
         else:
             print(form.errors)
-            return redirect(url_for("forum.publish_question"))
+            return redirect(url_for('forum.publish_question'))
+
+
+@bp.route('/like_qst/<int:qst_id>', methods=['POST'])
+def like_qst(qst_id):
+    qst = QuestionModel.query.get(qst_id)
+    if qst:
+        qst.like_num += 1
+        db.session.commit()
+        pass
+
+    pass
+
+
+@bp.route('/like_ans/<int:ans_id>', methods=['POST'])
+def like_ans(ans_id):
+    pass
+
