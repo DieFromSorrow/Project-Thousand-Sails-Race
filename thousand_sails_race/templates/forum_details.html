@@ -1,10 +1,9 @@
-
 {% extends 'base.html' %}
 
 {% block title %}论坛内容{% endblock %}
 
 {% block styles %}
-    {{ static_file('css', 'bootstrap.4.6.min.css') }}
+    {{ static_file('css', 'https://cdn.bootcss.com/bootstrap/4.6.0/css/bootstrap.min.css', local=false) }}
     {{ static_file('css', 'forum_details.css') }}
 {% endblock %}
 
@@ -28,24 +27,75 @@
                         <input type="hidden" name="question_id" value="{{ question.id }}">
                     </div>
                     <div class="form-group" style="text-align: right;">
-                        <button class="btn btn-primary" href="{{ url_for('forum.like') }}">点赞</button>
-                        <button class="btn btn-primary">评论</button>
+                        {% if is_liked %}
+                            <button id="like-btn" class="btn btn-primary" style="background-color: orangered">
+                                已赞 {{ liked_num }}</button>
+                        {% else %}
+                            <button id="like-btn" class="btn btn-primary">点赞 {{ liked_num }}</button>
+                        {% endif %}
+                        <button id="comment-btn" class="btn btn-primary">评论 {{ question.answers|length }}</button>
                     </div>
                 </form>
                 <ul class="comment-group">
                     {% for answer in question.answers %}
-                    <li>
-                        <div class="user-info">
-                            {{ img('1.jpg') }}
-                            <span class="username">{{answer.author.username}}</span>
-                            <span class="create-time">{{ answer.create_time }}</span>
-                        </div>
-                        <p class="comment-content">{{answer.content}}</p>
-                    </li>
+                        <li>
+                            <div class="user-info">
+                                {{ img('1.jpg') }}
+                                <span class="username">{{ answer.author.username }}</span>
+                                <span class="create-time">{{ answer.create_time }}</span>
+                            </div>
+                            <p class="comment-content">{{ answer.content }}</p>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="col"></div>
         </div>
     </div>
+
+    <script>
+        let likeBtn = document.getElementById('like-btn')
+        let cmtBtn = document.getElementById('comment-btn')
+
+        function like() {
+            let liked = false
+            if (likeBtn.textContent.includes('已赞')) {
+                liked = true
+            }
+            fetch('{{ url_for("forum.like_qst") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    qst_id: [{{ question.id|safe }}],
+                    liked: liked
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let likeCount = parseInt(likeBtn.textContent.match(/\d+/)[0])
+                        if (liked) {
+                            likeCount -= 1
+                            likeBtn.textContent = `点赞 ${likeCount}`
+                            likeBtn.style.backgroundColor = null
+                        } else {
+                            likeCount += 1
+                            likeBtn.textContent = `已赞 ${likeCount}`
+                            likeBtn.style.backgroundColor = 'orangered'
+                        }
+                    } else {
+                        console.log('Request failed');
+                    }
+                })
+                .catch(error => console.error(error))
+        }
+
+
+        likeBtn.addEventListener('click', () => {
+            event.preventDefault()
+            like()
+        })
+    </script>
 {% endblock %}

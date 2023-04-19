@@ -37,6 +37,7 @@ def forge(user, race, news, lib, hot_race, exp, qst, ans):
     click.echo('Initialized database.')
 
     click.echo('Generating the administrator...')
+    fake_admin()
     click.echo('Generating %d users...' % user)
     fake_user(user)
     click.echo('Generating %d races info...' % race)

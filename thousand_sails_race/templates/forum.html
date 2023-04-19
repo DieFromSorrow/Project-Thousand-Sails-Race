@@ -4,11 +4,7 @@
 {% block title %}资源库{% endblock %}
 
 {% block styles %}
-<<<<<<< HEAD
-    {{ static_file('css', 'bootstrap.4.6.min.css') }}
-=======
     {{ static_file('css', 'https://cdn.bootcss.com/bootstrap/4.6.0/css/bootstrap.min.css', local=false) }}
->>>>>>> ebd10ca7c0cd82b0014d2764946b93d923dda281
     {{ static_file('css', 'forum.css') }}
 {% endblock %}
 
@@ -45,7 +41,7 @@
                     {% for question in questions %}
                     <li>
                         <div class="side-question">
-                            {{ img('tuoxiang.jpg') }}
+                            {{ img('tuoxiang.jpg', class="side-question-avatar") }}
                         </div>
                         <div class="question-main">
                             <div class="question-title">

@@ -1,10 +1,11 @@
 
 
-from flask import Blueprint, render_template, g, request, flash, redirect,url_for, session
+from flask import Blueprint, render_template, g, request, redirect,url_for, \
+    session, flash, jsonify
 
 from thousand_sails_race import db
 from thousand_sails_race.forms import AnswerForm, QuestionForm
-from thousand_sails_race.models import QuestionModel, AnswerModel
+from thousand_sails_race.models import QuestionModel, AnswerModel, UserModel
 
 bp = Blueprint('forum', __name__, url_prefix='/forum')
 
@@ -18,11 +19,13 @@ def forum():
 @bp.route('/forum_details/<qst_id>')
 def forum_question(qst_id):
     question = QuestionModel.query.get(qst_id)
+    is_liked = g.get('user_who') in question.like_user
+    liked_num = len(question.like_user)
     if session.get('user_id') != question.author_id:
         question.view_num += 1
         db.session.commit()
         pass
-    return render_template("forum_details.html", question=question)
+    return render_template("forum_details.html", question=question, is_liked=is_liked, liked_num=liked_num)
 
 
 @bp.route('/search_forum', methods=['POST', 'GET'])
@@ -41,10 +44,10 @@ def public_answer():
         answer = AnswerModel(content=content, question_id=question_id, author_id=g.user_who.id)
         db.session.add(answer)
         db.session.commit()
-        return redirect(url_for('forum.forum_question', ques_id=question_id))
+        return redirect(url_for('forum.forum_question', qst_id=question_id))
     else:
         print(form.errors)
-        return redirect(url_for('forum.forum_question', ques_id=request.form.get("question_id")))
+        return redirect(url_for('forum.forum_question', qst_id=request.form.get("question_id")))
 
 
 # 发布问答的页面
@@ -69,14 +72,23 @@ def publish_question():
             return redirect(url_for('forum.publish_question'))
 
 
-@bp.route('/like_qst/<int:qst_id>', methods=['POST'])
-def like_qst(qst_id):
+@bp.route('/like_qst', methods=['POST'])
+def like_qst():
+    data = request.get_json()
+    qst_id = data['qst_id'][0]
     qst = QuestionModel.query.get(qst_id)
     if qst:
-        db.session.commit()
-        pass
-
-    pass
+        if data['liked']:
+            usr = g.get('user_who')
+            qst.like_user.remove(usr)
+            db.session.commit()
+            pass
+        else:
+            usr = g.get('user_who')
+            qst.like_user.append(usr)
+            db.session.commit()
+            pass
+    return jsonify({'success': True})
 
 
 @bp.route('/like_ans/<int:ans_id>', methods=['POST'])
