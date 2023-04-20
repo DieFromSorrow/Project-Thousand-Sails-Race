@@ -22,7 +22,7 @@
                 <p class="question-content">{{ question.content }}
                 </p>
                 <hr>
-                <h4 class="comment-group-title">评论：</h4>
+                <h4 class="comment-group-title">评论（共{{ question.answers|length }}条）：</h4>
                 <form action="{{ url_for('forum.public_answer') }}" method="post">
                     <div class="form-group">
                         <input type="text" placeholder="请填写评论" name="content" class="form-control">

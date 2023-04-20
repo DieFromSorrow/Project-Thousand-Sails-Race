@@ -1,9 +1,8 @@
-
 from thousand_sails_race.emails import send_captcha
 from thousand_sails_race.models import UserModel
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session, flash, make_response
 from thousand_sails_race.extends import mail, db
-from thousand_sails_race.forms import RegisterForm, CaptchaForm, LoginForm
+from thousand_sails_race.forms import RegisterForm, CaptchaForm, LoginForm, ForgetpawForm
 from werkzeug.security import generate_password_hash
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -72,3 +71,25 @@ def captcha():
         response.delete_cookie('password')
         return redirect('/')
     return render_template('captcha.html', form=form)
+
+
+@bp.route("/forgetpsw", methods=['GET', 'POST'])
+def modify_paw():
+    form = ForgetpawForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        pwd = form.password.data
+        session['captcha'] = send_captcha(email)
+        user = UserModel.query.filter_by(email=email).first()
+        user.password = generate_password_hash(pwd)
+        db.session.commit()
+        return redirect('/')
+    return render_template('login.html', form=form)
+
+
+@bp.route("/cap")
+def get_cap():
+    # 从前端传回来的email
+    if 'captcha' not in session:
+        return redirect('/')
+

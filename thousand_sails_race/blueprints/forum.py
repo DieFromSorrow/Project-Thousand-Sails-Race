@@ -6,6 +6,8 @@ from thousand_sails_race import db
 from thousand_sails_race.forms import AnswerForm, QuestionForm
 from thousand_sails_race.models import QuestionModel, AnswerModel
 
+
+
 bp = Blueprint('forum', __name__, url_prefix='/forum')
 
 
@@ -22,8 +24,10 @@ def forum_question(ques_id):
 
 @bp.route("/search_forum", methods=['POST', 'GET'])
 def search_question():
-    q = str(request.args.get("q"))
-    forums=QuestionModel.query.filter(QuestionModel.title.contains(q)).all()
+    # q = str(request.args.get("q"))
+    q = request.args.get("q")
+    # forums=QuestionModel.query.filter(QuestionModel.title.contains(q)).all()
+    forums = search.whoosh_search(QuestionModel, query=q, fields=['title'], limit=20)
     return render_template("forum.html", questions=forums)
 
 

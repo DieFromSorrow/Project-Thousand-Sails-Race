@@ -16,6 +16,11 @@ wtforms = "*"
 sendgrid = "*"
 bokeh = "*"
 cryptography = "*"
+flask-socketio = "*"
+flask-msearch = "*"
+whoosh = "*"
+flask-whooshalchemy = "*"
+flask-whooshee = "*"
 
 [dev-packages]
 faker = "*"

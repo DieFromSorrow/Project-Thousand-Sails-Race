@@ -1,7 +1,7 @@
 from flask import Flask, session, g
 
 from thousand_sails_race import settings
-from thousand_sails_race.extends import db, mail
+from thousand_sails_race.extends import db, mail,whooshee
 
 from thousand_sails_race.blueprints.auth import bp as auth_bp
 from thousand_sails_race.blueprints.news import bp as news_bp
@@ -11,10 +11,8 @@ from thousand_sails_race.blueprints.sharing import bp as sharing_bp
 from thousand_sails_race.blueprints.library import bp as library_bp
 from thousand_sails_race.blueprints.admin import bp as admin_bp
 from thousand_sails_race.blueprints.forum import bp as forum_bp
-
 from flask_migrate import Migrate
-
-from thousand_sails_race.models import UserModel
+from thousand_sails_race.models import UserModel, QuestionModel
 
 
 def register_commands():
@@ -32,6 +30,9 @@ app.jinja_env.lstrip_blocks = True
 
 db.init_app(app)
 mail.init_app(app)
+whooshee.init_app(app)
+
+
 
 migrate = Migrate(app, db)
 
@@ -46,6 +47,11 @@ app.register_blueprint(admin_bp)
 app.register_blueprint(forum_bp)
 
 register_commands()
+
+
+@app.template_filter('replace1')
+def replace1(value):
+    return value.replace(' ', '//n')
 
 
 @app.before_request

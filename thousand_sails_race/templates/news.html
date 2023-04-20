@@ -42,9 +42,9 @@
         {% for new in news %}
         <dl class="clearfix csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed" data-feed-show="true" data-dsm="post">
             <dd>
-                <h2><a href="#" target="_blank">{{ new.newstheme }}</a></h2>
+                <h2><a href="{{ url_for('news.news_info',news_id=new.id)}}" target="_blank">{{ new.newstheme }}</a></h2>
                 <div class="summary">
-                    {{ new.newscontent }}
+                    {{ new.newscontent|truncate(length=100) }}
                 </div>
                 <ul>
                     <li class="time">
