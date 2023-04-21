@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}比赛网页{% endblock %}
+{% block title %}竞赛信息详情{% endblock %}
 
 {% block styles %}
     {{ static_file('css', 'sharing_page.css') }}
+        {{ static_file('css', 'bootstrap.4.6.min.css') }}
 {% endblock %}
 
 {% block content %}
     <div class="box" style="margin-top: 80px">
-{#        <h2 style="margin-top: 81px;">全国大学生数学建模竞赛</h2>#}
-{#        <p class="jingsai">2023-03-15 17:52 &nbsp;&nbsp;&nbsp;来源：<a href="#">人民日报</a></p>#}
-{#        <hr>#}
+        <h2 style="margin-top: 81px;">{{ race.name }}</h2>
+        <p class="jingsai">开始时间：{{ race.start_time}} &nbsp;&nbsp;&nbsp;官网：<a href="{{ race.href }}">{{race.href}}</a></p>
+        <hr>
 {#        <p>又是一年“3·15”国际消费者权益消费维权,相关议题再度引发关注。数据显示2022年有近七成受访者对国内消费环境总体表示放心。这表明经过社会各方不懈努力我国消费者权益保护工作取得了明显成效。但也不能忽视消费领域仍存在不少矛盾有待解决。</p>#}
 {#        <p class="pic"> <img src="images/666.png" alt=""> </p>#}
 {#        <h4>通过对平台投诉数据分析,去年3月以来“人民投诉”消费维权主要呈现以下几大特点:</h4>#}
@@ -32,6 +33,10 @@
 {#        <p>2022年3月以来,“人民投诉”平台收到企业回复处理1503件,同比增长1267%。与此同时，平台投诉比重较大的房产、电商/App购物/跨境购、快递物流、医美、共享消费、互联网金融等领域的投诉，持续得不到相关平台的回复处理。相关问题如房产类捆绑销售、不达标强制交房、降质减配、价格欺诈；微信小程序商家或个人社交账号在无第三方资金托管的情况下进行销售或诱导私信交易，售后发生纠纷便失联；互联网涉众金融监管缺失、风险不可控等问题，投诉维权周期较长，遭遇“瓶颈”难有进展。#}
 {#        </p>#}
 
-{{ race.details }}
+{#这种方法是删除标签{% autoescape off %}#}
+{#    {{ race.details}}#}
+{#{% endautoescape %}#}
+{#这种是将标签转化为格式{{ race.details|safe}}#}
+    {{ race.details|safe}}
     </div>
 {% endblock %}

@@ -47,11 +47,22 @@
                             <div class="question-title">
                                 <a href="{{ url_for('forum.forum_question', qst_id=question.id )}}">{{question.title}}</a>
                             </div>
+
+
+                            <div class="question-main">
+{#                                <div class="question-title"><a href="{{ url_for('forum.forum_question',qst_id=question.id )}}">{{question.title}}</a></div>#}
+{#                                <div class="question-content">{{ question.content|truncate(length=30) }}</div>#}
+{#                                <div class="question-detail">#}
+{#                                    <span class="question-author">作者：{{ question.author.username }}</span>#}
+{#                                    <span class="question-time">创建时间：{{ question.create_time }}</span>#}
+{#                                </div>#}
+
                             <div class="question-content">{{ question.content }}</div>
                             <div class="question-detail">
                                 <span class="question-author">作者：{{ question.author.username }}</span>
                                 <span class="question-time">创建时间：{{ question.create_time }}</span>&nbsp;
                                 <span class="question-view_num">浏览量：{{ question.view_num }}</span>
+
                             </div>
                         </div>
                     </li>

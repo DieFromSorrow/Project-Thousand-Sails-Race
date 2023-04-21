@@ -6,6 +6,7 @@
     {{ static_file('css', 'index.css') }}
     {{ static_file('js', 'animate.js') }}
     {{ static_file('js', 'rotation_chart.js') }}
+{#    {{ static_file('css', 'bootstrap.4.6.min.css') }}#}
 {% endblock %}
 
 
@@ -86,7 +87,7 @@
                 <li class="rm">
                     <a href="{{ url_for('index.races_10',racename_id=selected.id)}}">
 
-                        {{ img('hot/2.' + [loop.index]|join + '.png') }}
+                        {{ img('hot/2.' + [loop.index]|join + '.png', class="image") }}
                         <h3>{{ selected.name }}</h3>
                         <p><span>精选</span>{{ selected.type }}</p>
 

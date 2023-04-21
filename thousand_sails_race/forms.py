@@ -70,4 +70,18 @@ class QuestionForm(wtforms.Form):
     content = wtforms.StringField(validators=[Length(min=3,message="内容格式错误")])
 
 
+class ForgetpawForm(FlaskForm):
+    email = wtforms.StringField(validators=[Email(message="邮箱格式错误！")])
 
+    password = wtforms.StringField(validators=[Length(min=6, max=20, message="密码格式错误！")])
+    password_confirm = wtforms.StringField(validators=[EqualTo("password")])
+    captcha = wtforms.StringField(validators=[Length(min=4, max=4, message="验证码格式错误！")])
+
+    submit = wtforms.SubmitField('确认修改')
+
+    def validate_captcha(self, field):
+        captcha = field.data
+        email = self.email.data
+        captcha_model = session['captcha']
+        if not captcha_model:
+            raise wtforms.ValidationError(message="邮箱验证码错误！")

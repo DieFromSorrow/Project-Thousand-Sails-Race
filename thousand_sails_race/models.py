@@ -1,6 +1,7 @@
 from thousand_sails_race.extends import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash
+from thousand_sails_race.extends import whooshee
 
 
 liker_qst = db.Table('liker_qst',
@@ -11,6 +12,7 @@ liker_qst = db.Table('liker_qst',
 # 用户信息表
 class UserModel(db.Model):
     __tablename__ = "user"
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(200), nullable=False)
@@ -104,8 +106,10 @@ class ExperienceModel(db.Model):
 
 
 # 发表问题--id,题目、内容、发表时间
+
 class QuestionModel(db.Model):
     __tablename__ = "question"
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)

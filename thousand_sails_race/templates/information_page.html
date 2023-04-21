@@ -4,10 +4,11 @@
 
 {% block styles %}
     {{ static_file('css', 'sharing_page.css') }}
+    {{ static_file('css', 'bootstrap.4.6.min.css') }}
 {% endblock %}
 
 {% block content %}
     <div class="box" style="margin-top: 80px">
-    {{ race_expe.type }}
+    {{ race_expe.content|safe }}
     </div>
 {% endblock %}

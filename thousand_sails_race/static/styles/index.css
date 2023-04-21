@@ -333,3 +333,13 @@
     height: 155px;
     width: 227px;
 }
+
+
+.image:hover {
+    transform: scale(1.1);
+}
+
+.image {
+    transition: transform 0.2s ease-in-out;
+}
+

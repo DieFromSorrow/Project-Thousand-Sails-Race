@@ -1,11 +1,14 @@
+from operator import or_
 
-
+from bokeh.core.query import _or
 from flask import Blueprint, render_template, g, request, redirect,url_for, \
     session, flash, jsonify
 
 from thousand_sails_race import db
 from thousand_sails_race.forms import AnswerForm, QuestionForm
 from thousand_sails_race.models import QuestionModel, AnswerModel, UserModel
+
+
 
 bp = Blueprint('forum', __name__, url_prefix='/forum')
 
@@ -30,9 +33,17 @@ def forum_question(qst_id):
 
 @bp.route('/search_forum', methods=['POST', 'GET'])
 def search_question():
+
+    # q = str(request.args.get("q"))
+    # q = str(request.args.get("q"))
+    # forums=QuestionModel.query.filter(QuestionModel.title.contains(q)).all()
+    # forums = QuestionModel.query.whooshee_search(q)
+    # return render_template("forum.html", questions=forums)
+
     q = str(request.args.get("q"))
-    forums = QuestionModel.query.filter(QuestionModel.title.contains(q)).all()
+    forums = QuestionModel.query.filter(or_(QuestionModel.title.contains(q),QuestionModel.content.contains(q))).all()
     return render_template('forum.html', questions=forums)
+
 
 
 @bp.route('/answer/public', methods=['POST'])

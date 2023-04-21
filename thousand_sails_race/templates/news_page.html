@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}x新闻信息{% endblock %}
+
+{% block styles %}
+
+        {{ static_file('css', 'bootstrap.4.6.min.css') }}
+{% endblock %}
+
+{% block content %}
+
+<div class="box" style="margin-top: 80px">
+<h2 style="margin-top: 81px;">{{ news.newstheme }}</h2>
+    <p class="jingsai">发布时间：{{ news.news_time}} &nbsp;&nbsp;&nbsp;竞赛：{{ race.name}}</p>
+        <hr>
+{{ news.newscontent|safe}}
+</div>
+{% endblock %}

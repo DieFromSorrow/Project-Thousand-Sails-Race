@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-
-{{ extends 'macros.html' }}
-
 <html lang="zh-CN">
 
 <head>
     <meta charset="utf-8">
     <title>登录注册忘记密码页面</title>
-    {{ static_file('css', 'denglu.css') }}
+    <link rel="stylesheet" href="css/denglu.css">
 </head>
 
 <body>
@@ -18,17 +15,28 @@
         <div class="formRight">
             <!-- Forgot password form -->
             <form id="forgot" class="otherForm">
-                <header>
+                <!-- <header>
                     <h1>忘记密码</h1>
-                    <p>输入邮箱找回密码</p>
-                </header>
+                    <p>输入邮箱重改密码</p>
+                </header> -->
                 <section>
                     <label>
                         <p>邮箱</p>
                         <input type="email" placeholder=" ">
                         <div class="border"></div>
+                        <div class="yanzhengma"><button type="button">获取</button></div>
                     </label>
-                    <button type="submit">发送邮件</button>
+                    <label>
+                        <p>验证码</p>
+                        <input type="password" placeholder=" ">
+                        <div class="border"></div>
+                    </label>
+                    <label>
+                        <p>新密码</p>
+                        <input type="password" placeholder=" ">
+                        <div class="border"></div>
+                    </label>
+                    <button type="submit">登录</button>
                 </section>
                 <footer>
                     <button type="button" class="forgotBtn">返回</button>
@@ -44,7 +52,7 @@
                     <label>
                         <p>用户名</p>
                         <input type="text" placeholder=" ">
-                        <div class="border"></div>
+                        <!-- <div class="border"></div> -->
                     </label>
                     <label>
                         <p>密码</p>
@@ -95,7 +103,7 @@
         </div>
     </div>
     <script src="https://p.erlangyun.com/jQuery/jQuery1.7.2.js"></script>
-    <script src="scripts/denglu.js"></script>
+    <script src="js/denglu.js"></script>
 </body>
 
 </html>

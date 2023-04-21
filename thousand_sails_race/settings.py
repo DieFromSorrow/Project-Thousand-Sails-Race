@@ -1,6 +1,7 @@
 
 import os
 
+
 SECRET_KEY = "secret_key"
 
 # mysql所在的主机名

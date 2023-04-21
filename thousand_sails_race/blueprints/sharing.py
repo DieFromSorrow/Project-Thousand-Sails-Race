@@ -1,3 +1,4 @@
+from operator import or_
 
 from flask import Blueprint, render_template,request
 
@@ -21,5 +22,5 @@ def experice(exper_id):
 @bp.route("/search_experience", methods=['POST', 'GET'])
 def search_sharing():
     q = str(request.args.get("q"))
-    share = ExperienceModel.query.filter(ExperienceModel.content.contains(q)).all()
+    share=ExperienceModel.query.filter(or_(ExperienceModel.content.contains(q),ExperienceModel.title.contains(q))).all()
     return render_template("sharing.html", share=share)
