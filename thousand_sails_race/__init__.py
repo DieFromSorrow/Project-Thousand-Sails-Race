@@ -1,7 +1,7 @@
 from flask import Flask, session, g
 
 from thousand_sails_race import settings
-from thousand_sails_race.extends import db, mail,whooshee
+from thousand_sails_race.extends import db, mail
 
 from thousand_sails_race.blueprints.auth import bp as auth_bp
 from thousand_sails_race.blueprints.news import bp as news_bp
@@ -30,8 +30,6 @@ app.jinja_env.lstrip_blocks = True
 
 db.init_app(app)
 mail.init_app(app)
-whooshee.init_app(app)
-
 
 
 migrate = Migrate(app, db)

@@ -1,7 +1,7 @@
 from thousand_sails_race.extends import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash
-from thousand_sails_race.extends import whooshee
+
 
 
 liker_qst = db.Table('liker_qst',
