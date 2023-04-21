@@ -49,8 +49,8 @@
             <div class="dropdown1 gotoItm">
                 <button class="dropbtn1">个人中心</button>
                 <div class="dropdown-content1">
-                    <a href="{{ url_for('auth.logout') }}">退出登录</a>
-                    <a href="#">{{ g.user_who.email}}</a>
+                    <a href="{{ url_for('auth.logout') }}" style="color: #0D83FE;">退出登录</a>
+                    <a href="#" style="color: #0D83FE;">{{ g.user_who.email}}</a>
                 </div>
             </div>
             {% endif %}
