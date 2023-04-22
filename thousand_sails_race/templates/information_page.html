@@ -1,14 +1,49 @@
 {% extends 'base.html' %}
 
-{% block title %}比赛网页{% endblock %}
+{% block title %}经验分享{% endblock %}
 
 {% block styles %}
-    {{ static_file('css', 'sharing_page.css') }}
+
     {{ static_file('css', 'bootstrap.4.6.min.css') }}
+    <style>
+        body {
+            background: url(/images/articlebackgroud.jpg) repeat;
+        }
+
+        .bigdiv {
+            width: 1000px;
+            margin: 80px auto 0;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        p {
+            margin-left: 2em;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        em {
+            display: block;
+            text-align: center;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
-    <div class="box" style="margin-top: 80px">
+    <div class="bigdiv" >
+    <h1 >{{ race_expe.title }}</h1>
+        <em>发布时间：{{ race_expe.time}} &nbsp;&nbsp;&nbsp;发布者：{{ race_expe.author.username}}</em>
+        <hr>
+        <br>
     {{ race_expe.content|safe }}
     </div>
+    <script src="http://cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/sakura.js">
+    </script>
 {% endblock %}

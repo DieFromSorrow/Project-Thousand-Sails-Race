@@ -85,6 +85,7 @@ def publish_question():
 
 @bp.route('/like_qst', methods=['POST'])
 def like_qst():
+
     data = request.get_json()
     qst_id = data['qst_id'][0]
     qst = QuestionModel.query.get(qst_id)

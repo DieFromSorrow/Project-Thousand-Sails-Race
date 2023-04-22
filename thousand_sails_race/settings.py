@@ -23,8 +23,7 @@ MAIL_SERVER = "smtp.sendgrid.net"
 MAIL_USE_SSL = True
 MAIL_PORT = 465
 MAIL_USERNAME = '2937128647@qq.com'
-MAIL_PASSWORD = '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'
-# MAIL_PASSWORD = os.getenv('SENDGRID_API_KEY')
+MAIL_PASSWORD = os.getenv('SENDGRID_API_KEY')
 MAIL_DEFAULT_SENDER = ('Thousand_Sails_Race_Admin', '2937128647@qq.com')
 '''
 

@@ -1,18 +1,50 @@
 {% extends 'base.html' %}
 
-{% block title %}x新闻信息{% endblock %}
+{% block title %}新闻信息{% endblock %}
 
 {% block styles %}
 
         {{ static_file('css', 'bootstrap.4.6.min.css') }}
+    <style>
+        body {
+            background: url(/images/articlebackgroud.jpg) repeat;
+        }
+
+        .bigdiv {
+            width: 1000px;
+            margin: 80px auto 0;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        p {
+            margin-left: 2em;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        em {
+            display: block;
+            text-align: center;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
 
-<div class="box" style="margin-top: 80px">
-<h2 style="margin-top: 81px;">{{ news.newstheme }}</h2>
-    <p class="jingsai">发布时间：{{ news.news_time}} &nbsp;&nbsp;&nbsp;竞赛：{{ race.name}}</p>
-        <hr>
-{{ news.newscontent|safe}}
+<div class="bigdiv" >
+<h1 >{{ news.news_theme }}</h1>
+    <em>发布时间：{{ news.news_time}} &nbsp;&nbsp;&nbsp;竞赛：{{ news.race.name}}</em>
+    <hr>
+    <br>
+{{ news.news_content|safe}}
 </div>
+    <script src="http://cdn.jsdelivr.net/gh/wallleap/cdn@latest/js/sakura.js">
+    </script>
 {% endblock %}

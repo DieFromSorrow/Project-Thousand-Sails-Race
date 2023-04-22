@@ -27,7 +27,7 @@
 
 .question-title a {
     color: #259;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 900;
 }
 
@@ -46,7 +46,7 @@
 
 .question-content {
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .question-detail {
@@ -71,3 +71,11 @@
 .btn:hover {
     background-color: #00a4ff;
 }
+.image:hover {
+    transform: scale(1.01);
+}
+
+.image {
+    transition: transform 0.2s ease-in-out;
+}
+

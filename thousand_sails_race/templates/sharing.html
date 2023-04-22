@@ -40,8 +40,8 @@
                     <div class="media">
                         <div class="media-content">
                             <div class="content">
-                                <p><strong><a href="#">{{ shares.title }}</a></strong></p>
-                                <p><strong>作者（{{ shares.stdu_id }}）：</strong>{{ shares.content }}</p>
+                                <p><strong><a href="{{ url_for('sharing.experice',exper_id=shares.id) }}">{{ shares.title }}</a></strong></p>
+                                <p><strong>作者（{{ shares.author.username }}）：</strong>{{ shares.content|truncate(length=50)|replace('<h3>','')|safe}}</p>
                                 <p>
                                     <a class="tag is-medium is-lightblue has-addons">
                                         <i class="fa fa-thumbs-up"></i>
@@ -63,7 +63,7 @@
                     <div class="card-header">
                         <p class="card-header-title">石家庄铁道大学千帆竞发项目组</p>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content image">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-64x64">
@@ -89,8 +89,8 @@
                     </div>
                     <div class="card-content">
                         <ul class="lh-20">
-                            <li><a href="#">互联网加大赛</a><i class="fa fa-fire fp"></i></li>
-                            <li><a href="#">互联网加大赛</a><i class="fa fa-fire fs"></i></li>
+                            <li class="image"><a href="#">互联网加大赛</a><i class="fa fa-fire fp"></i></li>
+                            <li class="image"><a href="#">互联网加大赛</a><i class="fa fa-fire fs"></i></li>
                             <li><a href="#">互联网加大赛</a><i class="fa fa-fire ft"></i></li>
                             <li><a href="#">互联网加大赛</a></li>
                             <li><a href="#">互联网加大赛</a></li>

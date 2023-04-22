@@ -17,7 +17,7 @@
         <ul>
             {% for race in hot_race %}
 
-                <li>
+                <li class="image">
                     <a href="{{ url_for('index.hotrace',racename_id=race.id)}}">{{ race.name }} </a>
                 </li>
 
@@ -39,11 +39,11 @@
             <div class="bd">
                 {% for exper in experience %}
                 <ul>
-                    <li>
+                    <li class="image">
 
                         <a href="{{ url_for('sharing.experice',exper_id=exper.id) }}">
-                            <h4>{{exper.type}}</h4>
-                            <p>{{ exper.expe_time }}</p>
+                            <h4>{{exper.title}}</h4>
+                            <p>{{ exper.time }}</p>
                         </a>
                     </li>
                 </ul>
@@ -59,13 +59,13 @@
     <div class="goods w">
         <h3>精品推荐</h3>
         <ul>
-            <li>
+            <li class="image">
                 <a href="{{ url_for('library.library') }}">精选PPT模板</a>
             </li>
-            <li>
+            <li class="image">
                 <a href="{{ url_for('library.library') }}">项目计划书模板</a>
             </li>
-            <li>
+            <li class="image">
                 <a href="{{ url_for('library.library') }}">竞赛题库</a>
             </li>
 
@@ -84,10 +84,10 @@
         <div class="content clearfix">
             <ul>
                 {% for selected in selected_race %}
-                <li class="rm">
+                <li class="rm image">
                     <a href="{{ url_for('index.races_10',racename_id=selected.id)}}">
 
-                        {{ img('hot/2.' + [loop.index]|join + '.png', class="image") }}
+                        {{ img('hot/2.' + [loop.index]|join + '.png') }}
                         <h3>{{ selected.name }}</h3>
                         <p><span>精选</span>{{ selected.type }}</p>
 

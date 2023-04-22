@@ -55,15 +55,19 @@ class LoginForm(FlaskForm):
                 raise wtforms.ValidationError(message='密码错误')
 
 
+class PasswordForgottenForm(wtforms.Form):
+
+    pass
+
 
 class AnswerForm(wtforms.Form):
-    content=wtforms.StringField(validators=[Length(min=1,message="内容格式错误")])
-    question_id=wtforms.IntegerField(validators=[InputRequired(message="必须要传入问题id")])
+    content = wtforms.StringField(validators=[Length(min=1,message="内容格式错误")])
+    question_id = wtforms.IntegerField(validators=[InputRequired(message="必须要传入问题id")])
 
 
 class QuestionForm(wtforms.Form):
-    title=wtforms.StringField(validators=[Length(min=3,max=100,message="标题格式错误")])
-    content=wtforms.StringField(validators=[Length(min=3,message="内容格式错误")])
+    title = wtforms.StringField(validators=[Length(min=3,max=100,message="标题格式错误")])
+    content = wtforms.StringField(validators=[Length(min=3,message="内容格式错误")])
 
 
 class ForgetpawForm(FlaskForm):

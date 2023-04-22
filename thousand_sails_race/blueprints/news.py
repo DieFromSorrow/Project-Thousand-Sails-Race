@@ -62,5 +62,5 @@ def search():
 @bp.route('/news/<news_id>')
 def news_info(news_id):
     news = NewsModel.query.get(news_id)
-    race=RaceModel.query.get(news.raceinfo_id)
-    return render_template("news_page.html", news=news,race=race)
+
+    return render_template("news_page.html", news=news)
