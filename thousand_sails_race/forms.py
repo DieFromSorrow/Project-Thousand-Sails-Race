@@ -4,7 +4,6 @@ from wtforms.validators import Email, Length, EqualTo, InputRequired
 from thousand_sails_race.models import UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import session
-from thousand_sails_race.extends import db
 
 
 # Form:主要是用来验证前端提交的表单数据是否符合要求
@@ -53,11 +52,6 @@ class LoginForm(FlaskForm):
         if user:
             if not check_password_hash(user.password, password):
                 raise wtforms.ValidationError(message='密码错误')
-
-
-class PasswordForgottenForm(wtforms.Form):
-
-    pass
 
 
 class AnswerForm(wtforms.Form):
