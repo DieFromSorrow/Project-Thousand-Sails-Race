@@ -1,12 +1,9 @@
+
 from operator import or_
-
 from flask import Blueprint, render_template, g, request, flash, redirect
-
-from thousand_sails_race.models import NewsModel, RaceModel
-
 from thousand_sails_race.models import NewsModel
-
 from sqlalchemy.exc import ArgumentError
+from thousand_sails_race.blueprints.utils import login_verification
 
 
 bp = Blueprint('news', __name__, url_prefix='/news')
@@ -19,6 +16,7 @@ def get_news_num():
 
 
 @bp.route('/')
+@login_verification
 def news():
     begin_id = end_id = None
     try:
@@ -61,6 +59,6 @@ def search():
 
 @bp.route('/news/<news_id>')
 def news_info(news_id):
-    news = NewsModel.query.get(news_id)
+    _news = NewsModel.query.get(news_id)
+    return render_template("news_page.html", news=_news)
 
-    return render_template("news_page.html", news=news)

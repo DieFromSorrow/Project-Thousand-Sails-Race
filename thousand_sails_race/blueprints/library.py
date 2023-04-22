@@ -1,11 +1,13 @@
 
 from flask import Blueprint, render_template, request, flash, redirect, jsonify, session, url_for
 from thousand_sails_race.models import LibsModel
+from thousand_sails_race.blueprints.utils import login_verification
 
 bp = Blueprint('library', __name__, url_prefix='/library')
 
 
 @bp.route('/')
+@login_verification
 def library():
     return render_template('library.html')
 

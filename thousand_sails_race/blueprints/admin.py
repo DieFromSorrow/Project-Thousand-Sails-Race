@@ -17,12 +17,12 @@ def security_verification(func):
     :return warp: a safe view func
     """
     @wraps(func)
-    def warp(*args, **kwargs):
+    def wrapper(*args, **kwargs):
         if 'admin' not in session:
             abort(403)
         return func(*args, **kwargs)
 
-    return warp
+    return wrapper
 
 
 @bp.route('/')

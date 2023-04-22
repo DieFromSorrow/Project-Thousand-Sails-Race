@@ -1,19 +1,19 @@
 from operator import or_
 
-from bokeh.core.query import _or
 from flask import Blueprint, render_template, g, request, redirect,url_for, \
     session, flash, jsonify
 
 from thousand_sails_race import db
 from thousand_sails_race.forms import AnswerForm, QuestionForm
 from thousand_sails_race.models import QuestionModel, AnswerModel, UserModel
-
+from thousand_sails_race.blueprints.utils import login_verification
 
 
 bp = Blueprint('forum', __name__, url_prefix='/forum')
 
 
 @bp.route('/')
+@login_verification
 def forum():
     questions = QuestionModel.query.order_by(QuestionModel.create_time.desc()).all()
     return render_template('forum.html', questions=questions)
@@ -45,8 +45,8 @@ def search_question():
     return render_template('forum.html', questions=forums)
 
 
-
 @bp.route('/answer/public', methods=['POST'])
+@login_verification
 def public_answer():
     form = AnswerForm(request.form)
     if form.validate():
@@ -63,9 +63,8 @@ def public_answer():
 
 # 发布问答的页面
 @bp.route('/publish', methods=['GET', 'POST'])
+@login_verification
 def publish_question():
-    if not g.user_who:
-        return redirect(url_for('auth.login'))
     if request.method == 'GET':
         return render_template('publish.html')
     else:
@@ -84,8 +83,8 @@ def publish_question():
 
 
 @bp.route('/like_qst', methods=['POST'])
+@login_verification
 def like_qst():
-
     data = request.get_json()
     qst_id = data['qst_id'][0]
     qst = QuestionModel.query.get(qst_id)
@@ -101,9 +100,4 @@ def like_qst():
             db.session.commit()
             pass
     return jsonify({'success': True})
-
-
-@bp.route('/like_ans/<int:ans_id>', methods=['POST'])
-def like_ans(ans_id):
-    pass
 

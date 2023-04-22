@@ -3,7 +3,6 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash
 
 
-
 liker_qst = db.Table('liker_qst',
                      db.Column('liker_id', db.Integer, db.ForeignKey('user.id')),
                      db.Column('qst_id', db.Integer, db.ForeignKey('question.id')))
@@ -21,7 +20,6 @@ class UserModel(db.Model):
     exp = db.relationship('ExperienceModel', back_populates='author')
     questions = db.relationship('QuestionModel', back_populates='author')
     answers = db.relationship('AnswerModel', back_populates='author')
-
     liked_qst = db.relationship('QuestionModel', secondary=liker_qst, back_populates='like_user')
 
     def set_password(self, password):

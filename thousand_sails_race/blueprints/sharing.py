@@ -1,13 +1,14 @@
+
 from operator import or_
-
 from flask import Blueprint, render_template,request
-
 from thousand_sails_race.models import ExperienceModel
+from thousand_sails_race.blueprints.utils import login_verification
 
 bp = Blueprint('sharing', __name__, url_prefix='/sharing')
 
 
 @bp.route('/')
+@login_verification
 def sharing():
     share = ExperienceModel.query.order_by(ExperienceModel.time.desc()).all()
     return render_template('sharing.html',share=share)

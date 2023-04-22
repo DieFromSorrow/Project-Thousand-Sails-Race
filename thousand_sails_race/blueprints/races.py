@@ -1,12 +1,13 @@
 
-import json
 from flask import Blueprint, render_template, request, flash, redirect, jsonify, g
 from thousand_sails_race.models import RaceModel
+from thousand_sails_race.blueprints.utils import login_verification
 
 bp = Blueprint('races', __name__, url_prefix='/races')
 
 
 @bp.route('/')
+@login_verification
 def races():
     return render_template('races.html')
 
