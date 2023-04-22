@@ -1,7 +1,10 @@
 from thousand_sails_race.extends import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash
+<<<<<<< HEAD
 
+=======
+>>>>>>> 966f8e526318e3324e0b4b26e5a2e40e048d8d62
 
 
 liker_qst = db.Table('liker_qst',
