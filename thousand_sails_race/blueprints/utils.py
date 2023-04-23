@@ -8,7 +8,7 @@ def login_verification(func):
     def wrapper(*args, **kwargs):
         if 'login' not in session:
             flash('请先登录')
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('auth.auth', action='login'))
         return func(*args, **kwargs)
 
     return wrapper

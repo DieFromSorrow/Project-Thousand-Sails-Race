@@ -3,7 +3,7 @@ from flask import current_app
 from thousand_sails_race.extends import mail
 from flask_mail import Message
 from threading import Thread
-import random
+import random, string
 
 
 def _send_async_mail(_app, _message):
@@ -20,6 +20,7 @@ def send_async_mail(subject, to, body):
 
 
 def send_captcha(receptions):
-    _captcha = ''.join(str(random.randint(0, 9)) for _ in range(4))
-    send_async_mail(subject='千帆竞发邮箱验证码', to=receptions, body='<p>千帆竞发邮箱验证码为</p>' + '<h1>' + _captcha + '</h1>')
+    _captcha = ''.join(random.choices(string.digits, k=6))
+    send_async_mail(subject='千帆竞发邮箱验证码', to=receptions,
+                    body='<p>千帆竞发邮箱验证码为</p>' + '<h1>' + _captcha + '</h1>' + '<p>验证码在120s内有效，请勿泄露给他人</p>')
     return _captcha

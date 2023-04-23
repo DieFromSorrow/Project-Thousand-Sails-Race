@@ -49,7 +49,9 @@ def dashboard():
         '热门竞赛管理': url_for('admin.administer_hot_race'),
         '新闻管理界面': url_for('admin.administer_news'),
         '资源内容管理': url_for('admin.administer_lib'),
-        '论坛内容管理': url_for('admin.administer_forum')
+        '经验分享管理': url_for('admin.administer_exp'),
+        '论坛问题管理': url_for('admin.administer_qst'),
+        '论坛评论管理': url_for('admin.administer_ans')
     }
     return render_template('admin_dashboard.html', apis=apis)
 
@@ -145,7 +147,7 @@ class GenerateAdminViewFunctions:
         'email': {'table_head': 'Email', 'changeable': True, 'display': True, 'type': 'email'},
         'join_time': {'table_head': 'Registration Time', 'changeable': False, 'display': True, 'type': 'datetime-local'}
     })
-def user_view():
+def admin_user_view():
     pass
 
 
@@ -203,15 +205,45 @@ def admin_hot_race_view():
 
 
 @GenerateAdminViewFunctions(
-    api_name='forum', model_class=QuestionModel, title='Forum Management',
+    api_name='exp', model_class=ExperienceModel, title='经验分享管理界面',
+    table_dict={
+        'title': {'table_head': '标题', 'changeable': True, 'display': True, 'type': 'text'},
+        'type': {'table_head': '类型', 'changeable': True, 'display': True, 'type': 'text'},
+        'content': {'table_head': '内容', 'changeable': True, 'display': False, 'type': 'textarea'},
+        'time': {'table_head': '上传时间', 'changeable': True, 'display': True, 'type': 'datetime-local'},
+        'author_id': {'table_head': '作者ID', 'changeable': False, 'display': True, 'type': 'text'},
+        'all_race_id': {'table_head': '对应竞赛ID', 'changeable': True, 'display': True, 'type': 'text'},
+        'hot_race_id': {'table_head': '热门竞赛ID', 'changeable': True, 'display': True, 'type': 'text'}
+    })
+def admin_exp_view():
+    pass
+
+
+@GenerateAdminViewFunctions(
+    api_name='qst', model_class=QuestionModel, title='Question Management',
     table_dict={
         'title': {'table_head': 'Title', 'changeable': True, 'display': True, 'type': 'text'},
         'content': {'table_head': 'Content', 'changeable': True, 'display': False, 'type': 'textarea'},
         'create_time': {'table_head': 'Creating Time', 'changeable': True, 'display': True, 'type': 'datetime-local'},
-        'author_id': {'table_head': 'Author Id', 'changeable': False, 'display': False, 'type': 'text'}
+        'view_num': {'table_head': 'View Num', 'changeable': False, 'display': True, 'type': 'text'},
+        'author_id': {'table_head': 'Author Id', 'changeable': False, 'display': True, 'type': 'text'}
     })
-def admin_forum_view():
+def admin_qst_view():
     pass
+
+
+@GenerateAdminViewFunctions(
+    api_name='ans', model_class=AnswerModel, title='Answer Management',
+    table_dict={
+        'content': {'table_head': 'Content', 'changeable': True, 'display': False, 'type': 'textarea'},
+        'create_time': {'table_head': 'Creating Time', 'changeable': True, 'display': True, 'type': 'datetime-local'},
+        'question_id': {'table_head': 'Question ID', 'changeable': False, 'display': True, 'type': 'text'},
+        'author_id': {'table_head': 'Question ID', 'changeable': False, 'display': True, 'type': 'text'}
+    })
+def admin_ans_view():
+    pass
+
+
 
 
 

@@ -13,10 +13,10 @@
     </div>
     <div class="search-container">
         <input id="search-input" type="text" placeholder="Search...">
-        <button id="search-button">Search</button>
+        <button id="search-button">查找</button>
         {% if addable %}
             &nbsp;
-            <button id="add-button">Add New</button>
+            <button id="add-button">添加</button>
         {% endif %}
     </div>
 
@@ -50,8 +50,8 @@
                     {% endif %}
                 {% endfor %}
                 <td>
-                    <button class="modify-button" data-id="{{ row.id }}">Modify</button>
-                    <button class="delete-button" data-id="{{ row.id }}">Delete</button>
+                    <button class="modify-button" data-id="{{ row.id }}">修改</button>
+                    <button class="delete-button" data-id="{{ row.id }}">删除</button>
                 </td>
             </tr>
         {% endfor %}

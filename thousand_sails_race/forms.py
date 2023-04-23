@@ -10,6 +10,7 @@ from flask import session
 class RegisterForm(FlaskForm):
     email = wtforms.StringField(validators=[Email(message="邮箱格式错误！")])
     username = wtforms.StringField(validators=[Length(min=3, max=20, message="用户名格式错误！")])
+    captcha = wtforms.StringField(validators=[Length(min=6, max=6, message="验证码格式错误！")])
     password = wtforms.StringField(validators=[Length(min=6, max=20, message="密码格式错误！")])
     password_confirm = wtforms.StringField(validators=[EqualTo("password")])
     submit = wtforms.SubmitField('注册')
@@ -20,18 +21,13 @@ class RegisterForm(FlaskForm):
         if user:
             raise wtforms.ValidationError(message="该邮箱已被注册")
 
-
-class CaptchaForm(FlaskForm):
-    captcha = wtforms.StringField(validators=[Length(min=4, max=4, message="验证码格式错误！")])
-    submit = wtforms.SubmitField('验证')
-
     def validate_captcha(self, field):
         captcha = field.data
-        if 'captcha' not in session:
+        if 'verification_code' not in session:
             raise wtforms.ValidationError(message='请获取验证码')
-        elif session['captcha'] != captcha:
+        elif session['verification_code'] != captcha:
             raise wtforms.ValidationError(message='验证码错误')
-        session.pop('captcha')
+        session.pop('verification_code')
 
 
 class LoginForm(FlaskForm):
@@ -69,13 +65,15 @@ class ForgetpawForm(FlaskForm):
 
     password = wtforms.StringField(validators=[Length(min=6, max=20, message="密码格式错误！")])
     password_confirm = wtforms.StringField(validators=[EqualTo("password")])
-    captcha = wtforms.StringField(validators=[Length(min=4, max=4, message="验证码格式错误！")])
+    captcha = wtforms.StringField(validators=[Length(min=6, max=6, message="验证码格式错误！")])
 
     submit = wtforms.SubmitField('确认修改')
 
     def validate_captcha(self, field):
         captcha = field.data
-        email = self.email.data
-        captcha_model = session['captcha']
-        if not captcha_model:
-            raise wtforms.ValidationError(message="邮箱验证码错误！")
+        print(session.get('verification_code'))
+        if 'verification_code' not in session:
+            raise wtforms.ValidationError(message='请获取验证码')
+        elif session['verification_code'] != captcha:
+            raise wtforms.ValidationError(message='验证码错误')
+        session.pop('verification_code')

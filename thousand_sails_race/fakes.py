@@ -183,6 +183,8 @@ def fake_exp(count=80):
                 tzinfo=None
             ),
             author_id=random.randint(1, user_num),
+            hot_race_id=random.randint(1, hot_race_num),
+            all_race_id=random.randint(1, all_race_num)
         )
         db.session.add(exp)
         pass
@@ -209,6 +211,7 @@ def fake_question(count=80):
                 after_now=False,
                 tzinfo=None
             ),
+            view_num=random.randint(0, user_num),
             author_id=random.randint(1, user_num)
         )
         db.session.add(qst)

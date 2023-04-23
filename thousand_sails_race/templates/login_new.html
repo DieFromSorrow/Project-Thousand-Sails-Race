@@ -1,110 +1,241 @@
+{% from 'macros.html' import static_file, img %}
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
-    <meta charset="utf-8">
-    <title>登录注册忘记密码页面</title>
-    <link rel="stylesheet" href="css/denglu.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登陆</title>
+    {{ static_file('css', 'login_new.css') }}
+    {{ static_file('js', 'https://p.erlangyun.com/op.php?do=ajax&op=check_p_name_show', local=False) }}
+    {{ static_file('js', "https://p.erlangyun.com/jQuery/jQuery1.7.2.js", local=False) }}
+    {{ static_file('js', 'login_new.js') }}
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="formContainer" class="dwo">
-        <div class="formLeft">
-            {{ img('64x64.png') }}
-        </div>
-        <div class="formRight">
-            <!-- Forgot password form -->
-            <form id="forgot" class="otherForm">
-                <!-- <header>
-                    <h1>忘记密码</h1>
-                    <p>输入邮箱重改密码</p>
-                </header> -->
-                <section>
-                    <label>
-                        <p>邮箱</p>
-                        <input type="email" placeholder=" ">
-                        <div class="border"></div>
-                        <div class="yanzhengma"><button type="button">获取</button></div>
-                    </label>
-                    <label>
-                        <p>验证码</p>
-                        <input type="password" placeholder=" ">
-                        <div class="border"></div>
-                    </label>
-                    <label>
-                        <p>新密码</p>
-                        <input type="password" placeholder=" ">
-                        <div class="border"></div>
-                    </label>
-                    <button type="submit">登录</button>
-                </section>
-                <footer>
-                    <button type="button" class="forgotBtn">返回</button>
-                </footer>
-            </form>
-            <!-- Login form -->
-            <form id="login">
-                <header>
-                    <h1>欢迎回来</h1>
-                    <p>请先登录</p>
-                </header>
-                <section>
-                    <label>
-                        <p>用户名</p>
-                        <input type="text" placeholder=" ">
-                        <!-- <div class="border"></div> -->
-                    </label>
-                    <label>
-                        <p>密码</p>
-                        <input type="password" placeholder=" ">
-                        <div class="border"></div>
-                    </label>
-                    <button type="submit">登 录</button>
-                </section>
-                <footer>
-                    <button type="button" class="forgotBtn">忘记密码？</button>
-                    <button type="button" class="registerBtn">新用户？</button>
-                </footer>
-            </form>
-
-            <!-- Register form -->
-            <form id="register" class="otherForm">
-                <header>
-                    <h1>用户注册</h1>
-                    <p>注册后享受更多服务</p>
-                </header>
-                <section>
-                    <label>
-                        <p>用户名</p>
-                        <input type="text" placeholder=" ">
-                        <div class="border"></div>
-                    </label>
-                    <label>
-                        <p>邮箱</p>
-                        <input type="email" placeholder=" ">
-                        <div class="border"></div>
-                    </label>
-                    <label>
-                        <p>密码</p>
-                        <input type="password" placeholder=" ">
-                        <div class="border"></div>
-                    </label>
-                    <label>
-                        <p>重复密码</p>
-                        <input type="password" placeholder=" ">
-                        <div class="border"></div>
-                    </label>
-                    <button type="submit">注 册</button>
-                </section>
-                <footer>
-                    <button type="button" class="registerBtn">返回</button>
-                </footer>
-            </form>
-        </div>
+<div id="formContainer" class="dwo">
+    <div class="formLeft">
+        {{ img('64x64.png') }}
     </div>
-    <script src="https://p.erlangyun.com/jQuery/jQuery1.7.2.js"></script>
-    <script src="js/denglu.js"></script>
+    <div class="formRight">
+
+        <!-- Forgot password form -->
+        <form id="forgot" class="otherForm" method="post" action="{{ url_for('auth.auth', action='modify') }}">
+            {{ forget_pw_form.csrf_token }}
+            <!-- <header>
+                <h1>忘记密码</h1>
+                <p>输入邮箱重改密码</p>
+            </header> -->
+            <section>
+                <label>
+                    <p>邮箱</p>
+                    {% if forget_pw_form.email.errors|length > 0 %}
+                        <small class="error">{{ forget_pw_form.email.errors[0] }}</small>
+                    {% endif %}
+                    {{ forget_pw_form.email(id='fpw-email', type='email', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <label>
+                    <p>新密码</p>
+                    {% if forget_pw_form.password.errors|length > 0 %}
+                        <small class="error">{{ forget_pw_form.password.errors[0] }}</small>
+                    {% endif %}
+                    {{ forget_pw_form.password(type='password', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <label>
+                    <p>确认密码</p>
+                    {% if forget_pw_form.password_confirm.errors|length > 0 %}
+                        <small class="error">{{ forget_pw_form.password_confirm.errors[0] }}</small>
+                    {% endif %}
+                    {{ forget_pw_form.password_confirm(type='password', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <label>
+                    <p>验证码</p>
+                    <div class="yanzhengma">
+                        <button type="button" id="fpw-send-btn">获取</button>
+                    </div>
+                    {% if forget_pw_form.captcha.errors|length > 0 %}
+                        <small class="error">{{ forget_pw_form.captcha.errors[0] }}</small>
+                    {% endif %}
+                    {{ forget_pw_form.captcha(type='text', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <button type="submit">保存</button>
+            </section>
+            <footer>
+                <button type="button" class="forgotBtn">返回</button>
+            </footer>
+        </form>
+        {# action="{{ url_for('auth.login_tmp') }}"#}
+        <!-- Login form -->
+        <form id="login" method="post" action="{{ url_for('auth.auth', action='login') }}">
+            {{ login_form.csrf_token }}
+            <header>
+                <h1>欢迎回来</h1>
+                <p>请先登录</p>
+            </header>
+            <section>
+                <label>
+                    <p>邮箱</p>
+                    {% if login_form.email.errors|length > 0 %}
+                        <small class="error" style="color: red">{{ login_form.email.errors[0] }}</small>
+                    {% endif %}
+                    {{ login_form.email(type='text', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <label>
+                    <p>密码</p>
+                    {% if login_form.password.errors|length > 0 %}
+                        <small class="error" style="color: red">{{ login_form.password.errors[0] }}</small>
+                    {% endif %}
+                    {{ login_form.password(type='password', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <button type="submit">登 录</button>
+            </section>
+            <footer>
+                <button type="button" class="forgotBtn">忘记密码？</button>
+                <button id="admin_login" type="button" onclick="window.open('{{ url_for('admin.index') }}')">管理员登陆</button>
+                <button type="button" class="registerBtn">新用户？</button>
+            </footer>
+        </form>
+
+        <!-- Register form -->
+        <form id="register" class="otherForm" method="post" action="{{ url_for('auth.auth', action='register') }}">
+            {{ register_form.csrf_token }}
+            <header>
+                <h1>用户注册</h1>
+                <p>注册后享受更多服务</p>
+            </header>
+            <section>
+                <label>
+                    <p>邮箱</p>
+                    {% if register_form.email.errors|length > 0 %}
+                        <small class="error">{{ register_form.email.errors[0] }}</small>
+                    {% endif %}
+                    {{ register_form.email(id='register-email', type='email', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <label>
+                    <p>用户名</p>
+                    {% if register_form.username.errors|length > 0 %}
+                        <small class="error">{{ register_form.username.errors[0] }}</small>
+                    {% endif %}
+                    {{ register_form.username(type='text', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <label>
+                    <p>密码</p>
+                    {% if register_form.password.errors|length > 0 %}
+                        <small class="error">{{ register_form.password.errors[0] }}</small>
+                    {% endif %}
+                    {{ register_form.password(type='password', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <label>
+                    <p>确认密码</p>
+                    {% if register_form.password_confirm.errors|length > 0 %}
+                        <small class="error">{{ register_form.password_confirm.errors[0] }}</small>
+                    {% endif %}
+                    {{ register_form.password_confirm(type='password', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <label>
+                    <div class="yanzhengma">
+                        <button type="button" id="register-send-btn">获取</button>
+                    </div>
+                    <p>验证码</p>
+                    {% if forget_pw_form.captcha.errors|length > 0 %}
+                        <small class="error">{{ forget_pw_form.captcha.errors[0] }}</small>
+                    {% endif %}
+                    {{ forget_pw_form.captcha(type='text', placeholder=' ') }}
+                    <div class="border"></div>
+                </label>
+                <button type="submit">注 册</button>
+            </section>
+            <footer>
+                <button type="button" class="registerBtn">返回</button>
+            </footer>
+        </form>
+    </div>
+</div>
 </body>
 
+<script>
+
+    let countDownInterval;  // 用于存储倒计时的计时器
+    const registerSendBtn = document.getElementById('register-send-btn')
+    const fpwSendBtn = document.getElementById('fpw-send-btn')
+
+    // 发送验证码函数
+    function sendCode(emailID, btnOBJ) {
+        const email = document.getElementById(emailID).value;
+        if (email === '') {
+            alert('请输入邮箱');
+            return;
+        }
+
+        // 禁用按钮，避免重复点击
+        btnOBJ.disabled = true;
+
+        // 发送POST请求给后端
+        fetch('{{ url_for("auth.send_verification_code") }}', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: email})
+        })
+            .then(response => {
+
+                console.log(response)
+                if (response.ok) {
+                    // 请求成功，开始倒计时
+                    startCountDown(btnOBJ);
+                } else {
+                    // 请求失败，解锁按钮并提示错误信息
+                    btnOBJ.disabled = false;
+                    alert('发送验证码失败，请稍后再试');
+                }
+
+            })
+            .catch(error => {
+                // 请求失败，解锁按钮并提示错误信息
+                btnOBJ.disabled = false;
+                console.error(error);
+                alert('发送验证码失败，出现错误');
+            });
+    }
+
+    // 开始倒计时函数
+    function startCountDown(btnOBJ) {
+        let count = 120;  // 倒计时秒数
+        btnOBJ.innerText = `${count} 秒后重试`;
+
+        // 每秒更新倒计时显示
+        countDownInterval = setInterval(() => {
+            count--;
+            btnOBJ.innerText = `${count} 秒后重试`;
+
+            // 倒计时结束，解锁按钮并清除计时器
+            if (count === 0) {
+                btnOBJ.disabled = false;
+                btnOBJ.innerText = '发送';
+                clearInterval(countDownInterval);
+            }
+        }, 1000);
+    }
+
+    registerSendBtn.addEventListener('click', () => sendCode('register-email', registerSendBtn))
+    fpwSendBtn.addEventListener('click', () => sendCode('fpw-email', fpwSendBtn))
+
+</script>
+
 </html>
-<script type="text/javascript" src="https://p.erlangyun.com/op.php?do=ajax&op=check_p_name_show"></script>

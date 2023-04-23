@@ -2,23 +2,71 @@ from thousand_sails_race.emails import send_captcha
 from thousand_sails_race.models import UserModel
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session, flash, make_response
 from thousand_sails_race.extends import mail, db
-from thousand_sails_race.forms import RegisterForm, CaptchaForm, LoginForm, ForgetpawForm
+from thousand_sails_race.forms import RegisterForm, LoginForm, ForgetpawForm
 from werkzeug.security import generate_password_hash
+import time
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-@bp.route("/login", methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        email = form.email.data
+@bp.route('/<string:action>', methods=['GET', 'POST'])
+def auth(action):
+
+    login_form = LoginForm()
+    register_form = RegisterForm()
+    forget_pw_form = ForgetpawForm()
+
+    if action == 'login' and login_form.validate_on_submit():
+        email = login_form.email.data
         user = UserModel.query.filter_by(email=email).first()
-        flash("welcome on")
+        flash('登陆成功')
         session['login'] = True
         session['user_id'] = user.id
         return redirect('/')
-    return render_template('login.html', form=form)
+
+    if action == 'register' and register_form.validate_on_submit():
+        email = register_form.email.data.lower()
+        username = register_form.username.data
+        password = register_form.password.data
+        user = UserModel(
+            username=username,
+            password=generate_password_hash(password),
+            email=email
+        )
+        session['login'] = True
+        session['user_id'] = user.id
+        db.session.add(user)
+        db.session.commit()
+        flash('注册成功')
+        return redirect('/')
+
+    if action == 'modify' and forget_pw_form.validate_on_submit():
+        email = forget_pw_form.email.data
+        password = forget_pw_form.password.data
+        user = UserModel.query.filter_by(email=email).first()
+        user.password = generate_password_hash(password)
+        db.session.commit()
+        session['login'] = True
+        session['user_id'] = user.id
+        flash('修改成功')
+        return redirect('/')
+
+    return render_template('login_new.html', login_form=login_form,
+                           register_form=register_form, forget_pw_form=forget_pw_form)
+
+
+@bp.route('/send_verification_code', methods=['POST'])
+def send_verification_code():
+    data = request.get_json()
+    email = data.get('email')
+    if not email:
+        return {'success': False, 'message': 'Email is required'}, 400
+
+    # 将验证码存储在 session 中，有效期为 120 秒
+    session['verification_code'] = send_captcha(receptions=email)
+    print(session.get('verification_code'))
+
+    return {'success': True, 'message': 'Verification code sent successfully'}, 200
 
 
 @bp.route('/logout')
@@ -28,68 +76,4 @@ def logout():
         session.pop('user_id')
         flash('成功登出')
     return redirect('/')
-
-
-# GET 是从服务器获取数据
-# POST：将客户端的数据提交给服务器
-@bp.route("/register", methods=['GET', 'POST'])
-def register():
-    if 'captcha' in session:
-        flash('120s 内只能进行一次注册操作')
-        return redirect(url_for('auth.login'))
-    form = RegisterForm()
-    if form.validate_on_submit():
-        email = form.email.data.lower()
-        username = form.username.data
-        password = form.password.data
-        session['captcha'] = send_captcha(email)
-        response = make_response(redirect(url_for('auth.captcha')))
-        response.set_cookie(key='email', value=email, max_age=120)
-        response.set_cookie(key='username', value=username, max_age=120)
-        response.set_cookie(key='password', value=generate_password_hash(password), max_age=120)
-        return response
-    return render_template('register.html', form=form)
-
-
-@bp.route('/captcha', methods=['GET', 'POST'])
-def captcha():
-    if 'captcha' not in session:
-        return redirect('/')
-    form = CaptchaForm()
-    if form.validate_on_submit():
-        user = UserModel(
-            email=request.cookies.get('email'),
-            username=request.cookies.get('username'),
-            password=request.cookies.get('password')
-        )
-        db.session.add(user)
-        db.session.commit()
-        flash('注册成功')
-        response = make_response(redirect('/'))
-        response.delete_cookie('email')
-        response.delete_cookie('username')
-        response.delete_cookie('password')
-        return redirect('/')
-    return render_template('captcha.html', form=form)
-
-
-@bp.route("/forgetpsw", methods=['GET', 'POST'])
-def modify_paw():
-    form = ForgetpawForm()
-    if form.validate_on_submit():
-        email = form.email.data
-        pwd = form.password.data
-        session['captcha'] = send_captcha(email)
-        user = UserModel.query.filter_by(email=email).first()
-        user.password = generate_password_hash(pwd)
-        db.session.commit()
-        return redirect('/')
-    return render_template('login.html', form=form)
-
-
-@bp.route("/cap")
-def get_cap():
-    # 从前端传回来的email
-    if 'captcha' not in session:
-        return redirect('/')
 
