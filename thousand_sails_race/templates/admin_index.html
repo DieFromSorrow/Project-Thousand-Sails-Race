@@ -2,23 +2,23 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Thousand Sails Race Admin</title>
     {{ static_file('css', 'admin_index.css') }}
-  </head>
-  <body>
-    <div class="header">
-      <h1>Welcome to Thousand-Sails-Race Admin</h1>
-    </div>
-    <div class="form-container">
-      <form method="POST" action="{{ url_for('admin.login') }}">
+</head>
+<body>
+<div class="header">
+    <h1>Welcome to Thousand-Sails-Race Admin</h1>
+</div>
+<div class="form-container">
+    <form method="POST" action="{{ url_for('admin.login') }}">
         <h2>Please Login</h2>
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" required>
         <label for="password"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="password" required>
         <button type="submit">Login</button>
-      </form>
-    </div>
-  </body>
+    </form>
+</div>
+</body>
 </html>
