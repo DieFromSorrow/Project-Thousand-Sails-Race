@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登陆</title>
+    {{ static_file('icon', 'jing.ico') }}
     {{ static_file('css', 'login_new.css') }}
     {{ static_file('js', 'https://p.erlangyun.com/op.php?do=ajax&op=check_p_name_show', local=False) }}
     {{ static_file('js', "https://p.erlangyun.com/jQuery/jQuery1.7.2.js", local=False) }}
@@ -195,7 +196,7 @@
         })
             .then(response => {
 
-                console.log(response)
+                console.log(response.ok)
                 if (response.ok) {
                     // 请求成功，开始倒计时
                     startCountDown(btnOBJ);
