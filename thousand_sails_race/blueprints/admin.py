@@ -154,8 +154,8 @@ def admin_user_view():
 @GenerateAdminViewFunctions(
     api_name='news', model_class=NewsModel, title='News Management',
     table_dict={
-        'newstheme': {'table_head': 'Theme', 'changeable': True, 'display': True, 'type': 'text'},
-        'newscontent': {'table_head': 'Content', 'changeable': True, 'display': False, 'type': 'textarea'},
+        'news_theme': {'table_head': 'Theme', 'changeable': True, 'display': True, 'type': 'text'},
+        'news_content': {'table_head': 'Content', 'changeable': True, 'display': False, 'type': 'textarea'},
         'news_time': {'table_head': 'Time', 'changeable': True, 'display': True, 'type': 'datetime-local'}
     })
 def admin_news_view():
