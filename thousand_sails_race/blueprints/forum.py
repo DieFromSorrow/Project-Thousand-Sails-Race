@@ -90,12 +90,12 @@ def like_qst():
     qst = QuestionModel.query.get(qst_id)
     if qst:
         if data['liked']:
-            usr = g.get('user_who')
+            usr = g.user_who
             qst.like_user.remove(usr)
             db.session.commit()
             pass
         else:
-            usr = g.get('user_who')
+            usr = g.user_who
             qst.like_user.append(usr)
             db.session.commit()
             pass

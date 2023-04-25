@@ -1,10 +1,10 @@
 from thousand_sails_race.emails import send_captcha
 from thousand_sails_race.models import UserModel
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session, flash, make_response
-from thousand_sails_race.extends import mail, db
+from flask import Blueprint, render_template, request, redirect, session, flash
+from thousand_sails_race.extends import db
 from thousand_sails_race.forms import RegisterForm, LoginForm, ForgetpawForm
 from werkzeug.security import generate_password_hash
-import time
+
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -19,9 +19,9 @@ def auth(action):
     if action == 'login' and login_form.validate_on_submit():
         email = login_form.email.data
         user = UserModel.query.filter_by(email=email).first()
-        flash('登陆成功')
         session['login'] = True
         session['user_id'] = user.id
+        flash('登陆成功')
         return redirect('/')
 
     if action == 'register' and register_form.validate_on_submit():
@@ -33,10 +33,10 @@ def auth(action):
             password=generate_password_hash(password),
             email=email
         )
-        session['login'] = True
-        session['user_id'] = user.id
         db.session.add(user)
         db.session.commit()
+        session['login'] = True
+        session['user_id'] = user.id
         flash('注册成功')
         return redirect('/')
 
