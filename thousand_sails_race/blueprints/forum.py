@@ -1,11 +1,11 @@
 from operator import or_
 
 from flask import Blueprint, render_template, g, request, redirect,url_for, \
-    session, flash, jsonify
+    session, jsonify
 
 from thousand_sails_race import db
 from thousand_sails_race.forms import AnswerForm, QuestionForm
-from thousand_sails_race.models import QuestionModel, AnswerModel, UserModel
+from thousand_sails_race.models import QuestionModel, AnswerModel
 from thousand_sails_race.blueprints.utils import login_verification
 
 
